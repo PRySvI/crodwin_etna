@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+{% block body  %}
+<h1>Hello in registration page</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.email , {'label': 'Adresse mail','attr':{'placeholder': 'Votre adresse mail'}}) }}
+    {{ form_row(form.username , {'label': 'Nom d\'utilisateur','attr':{'placeholder': 'Votre nom d\'utilisateur'}}) }}
+    {{ form_row(form.password , {'label': 'Mot de passe','attr':{'placeholder': 'Votre mp'}}) }}
+    {{ form_row(form.password_repeat, {'label': 'Repetez votre mot de passe','attr':{'placeholder': 'Votre mp'}}) }}
+    <button type="submit" class="btn btn-success">Inscritpion!<button>
+    {{ form_end(form) }}
+{% endblock %}
