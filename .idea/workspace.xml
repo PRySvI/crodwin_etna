@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="936bc200-367b-4ab9-a75a-30fed3f32734" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Task_list.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/bootstrap.min.css" afterDir="false" />
-    </list>
+    <list default="true" id="936bc200-367b-4ab9-a75a-30fed3f32734" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -197,7 +194,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/asset" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="6" />
     <option name="y" value="26" />
     <option name="width" value="1914" />
@@ -309,15 +306,15 @@
       <workItem from="1543831805499" duration="10163000" />
       <workItem from="1543873728122" duration="4352000" />
       <workItem from="1543904503050" duration="9648000" />
-      <workItem from="1543921142817" duration="4756000" />
+      <workItem from="1543921142817" duration="5354000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64935000" />
+    <option name="totallyTimeSpent" value="65533000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="6" y="26" width="1914" height="1054" extended-state="1" />
+    <frame x="6" y="26" width="1914" height="1054" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.75947994" visible="true" weight="0.22454448" />
       <window_info anchor="bottom" id="TODO" order="6" />
