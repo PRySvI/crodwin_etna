@@ -1,12 +1,13 @@
 {% extends "base.html.twig" %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body  %}
-<h1>Hello in registration page</h1>
+<h1>Inscription</h1>
 
     {{ form_start(form) }}
-    {{ form_row(form.email , {'label': 'Adresse mail','attr':{'placeholder': 'Votre adresse mail'}}) }}
+    {{ form_row(form.email , {'label': 'Adresse mail','attr':{'placeholder': 'Votre adresse e-mail'}}) }}
     {{ form_row(form.username , {'label': 'Nom d\'utilisateur','attr':{'placeholder': 'Votre nom d\'utilisateur'}}) }}
-    {{ form_row(form.password , {'label': 'Mot de passe','attr':{'placeholder': 'Votre mp'}}) }}
-    {{ form_row(form.password_repeat, {'label': 'Repetez votre mot de passe','attr':{'placeholder': 'Votre mp'}}) }}
+    {{ form_row(form.password , {'label': 'Mot de passe','attr':{'placeholder': 'Votre mot de passe'}}) }}
+    {{ form_row(form.password_repeat, {'label': 'Répetez votre mot de passe','attr':{'placeholder': 'Votre mot de passe'}}) }}
     <button type="submit" class="btn btn-success">Valider</button>
     {{ form_end(form) }}
 {% endblock %}

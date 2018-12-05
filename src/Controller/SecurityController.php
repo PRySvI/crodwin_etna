@@ -74,4 +74,15 @@ class SecurityController extends AbstractController
             'controller_name' => 'SecurityController',
         ]);
     }
+
+    /**
+     * @Route("/home", name="home")
+     */
+    public function home()
+    {
+        return $this->render('security/home.html.twig', [
+            'controller_name' => 'SecurityController',
+        ]);
+    }
+
 }
