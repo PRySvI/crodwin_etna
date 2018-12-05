@@ -8,7 +8,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
@@ -27,17 +29,32 @@ class SecurityController extends AbstractController
             $user->setPassword($hash);
             $menager->persist($user);
             $menager->flush();
+            //Partie d'auto login apres l'inscription
+            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+            $this->container->get('security.token_storage')->setToken($token);
+            $this->get('session')->set('_security_main',serialize($token));
+
+
         }
-        return $this ->render('security/login.html.twig', ['form' => $form->createView()
+        return $this ->render('security/registration.html.twig', ['form' => $form->createView()
         ]);
 
     }
     /**
      * @Route("/connection", name="security_login")
      */
-    public function login()
+    public function login(Request $request, AuthenticationUtils $authUtils)
     {
-        return $this->render('security/login.html.twig');
+        // recevoir un erreur s'il existe
+        $error = $authUtils->getLastAuthenticationError();
+
+        // derniere login d'utlisateur
+        $lastUsername = $authUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ));
     }
 
     /**

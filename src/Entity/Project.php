@@ -27,7 +27,7 @@ class Project
     private $user_id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="array")
      */
     private $languages;
 
@@ -60,7 +60,7 @@ class Project
         return $this;
     }
 
-    public function getLanguages(): ?string
+    public function getLanguages(): array
     {
         return $this->languages;
     }

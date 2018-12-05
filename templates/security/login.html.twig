@@ -6,16 +6,19 @@
 
         <h1>Connection page</h1>
 
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
         <form action="{{ path('security_login') }}" method="post">
-            <div class="form-group">
-                <input required name="_username" placeholder="mail" type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <input required name="_password" placeholder="mp" type="password" class="form-control">
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-success">OK</button>
-            </div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="_username" />
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="_password" />
+
+            <input type="hidden" name="_target_path" value="/connection" />
+            <button type="submit">login</button>
         </form>
 
 
