@@ -16,6 +16,7 @@ class srcApp_KernelDevDebugContainerUrlMatcher extends Symfony\Bundle\FrameworkB
         $this->context = $context;
         $this->staticRoutes = array(
             '/project_create' => array(array(array('_route' => 'project_create', '_controller' => 'App\\Controller\\ProjectController::create'), null, null, null, false, null)),
+            '/done' => array(array(array('_route' => 'done_page', '_controller' => 'App\\Controller\\ProjectController::created'), null, null, null, false, null)),
             '/inscription' => array(array(array('_route' => 'security_registration', '_controller' => 'App\\Controller\\SecurityController::registration'), null, null, null, false, null)),
             '/connection' => array(array(array('_route' => 'security_login', '_controller' => 'App\\Controller\\SecurityController::login'), null, null, null, false, null)),
             '/logout' => array(array(array('_route' => 'security_logout', '_controller' => 'App\\Controller\\SecurityController::logout'), null, null, null, false, null)),

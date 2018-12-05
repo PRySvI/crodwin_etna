@@ -77,22 +77,7 @@ class __TwigTemplate_9042aff54c37936efa9e510a143ecabb3dbde5ab45875658ea2a081027c
 </style>
 
 <div class=\"example-wrapper\">
-    <h1>Hello ";
-        // line 12
-        echo twig_escape_filter($this->env, (isset($context["controller_name"]) || array_key_exists("controller_name", $context) ? $context["controller_name"] : (function () { throw new Twig_Error_Runtime('Variable "controller_name" does not exist.', 12, $this->source); })()), "html", null, true);
-        echo "! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href=\"";
-        // line 16
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\CodeExtension']->getFileLink("src/Controller/ProjectController.php", 0), "html", null, true);
-        echo "\">src/Controller/ProjectController.php</a></code></li>
-        <li>Your template at <code><a href=\"";
-        // line 17
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\CodeExtension']->getFileLink("templates/project/index.html.twig", 0), "html", null, true);
-        echo "\">templates/project/index.html.twig</a></code></li>
-    </ul>
+    <h1>Okay project created! ✅</h1>
 </div>
 ";
         
@@ -115,7 +100,7 @@ class __TwigTemplate_9042aff54c37936efa9e510a143ecabb3dbde5ab45875658ea2a081027c
 
     public function getDebugInfo()
     {
-        return array (  93 => 17,  89 => 16,  82 => 12,  74 => 6,  65 => 5,  45 => 3,  15 => 1,);
+        return array (  74 => 6,  65 => 5,  45 => 3,  15 => 1,);
     }
 
     public function getSourceContext()
@@ -131,13 +116,7 @@ class __TwigTemplate_9042aff54c37936efa9e510a143ecabb3dbde5ab45875658ea2a081027c
 </style>
 
 <div class=\"example-wrapper\">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href=\"{{ 'src/Controller/ProjectController.php'|file_link(0) }}\">src/Controller/ProjectController.php</a></code></li>
-        <li>Your template at <code><a href=\"{{ 'templates/project/index.html.twig'|file_link(0) }}\">templates/project/index.html.twig</a></code></li>
-    </ul>
+    <h1>Okay project created! ✅</h1>
 </div>
 {% endblock %}
 ", "project/index.html.twig", "/mnt/DATA/ETNA/Projets 2018/Crowdin/templates/project/index.html.twig");

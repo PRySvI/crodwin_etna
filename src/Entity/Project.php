@@ -80,10 +80,18 @@ class Project
         return $this->languages;
     }
 
-    public function setLanguages(string $lang): self
+    public function setLanguages(array $langs): self
     {
 
-            $this->languages[languages.length()+1] = $lang;
+        $this->languages = $langs;
+
+        return $this;
+    }
+
+    public function addLanguage(string $lang): self
+    {
+
+        array_push($this->languages , $lang);
 
         return $this;
     }

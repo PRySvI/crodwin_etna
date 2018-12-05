@@ -54,19 +54,11 @@ class __TwigTemplate_ff2045897cf2bcefab4b289662133bc57f77759e0424d19fbd226460cd5
 
         <h1>Connection page</h1>
 
-        ";
-        // line 9
-        if ((isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new Twig_Error_Runtime('Variable "error" does not exist.', 9, $this->source); })())) {
-            // line 10
-            echo "            <div>";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans(twig_get_attribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new Twig_Error_Runtime('Variable "error" does not exist.', 10, $this->source); })()), "messageKey", array()), twig_get_attribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new Twig_Error_Runtime('Variable "error" does not exist.', 10, $this->source); })()), "messageData", array()), "security"), "html", null, true);
-            echo "</div>
-        ";
-        }
-        // line 12
+       ";
+        // line 13
         echo "
         <form action=\"";
-        // line 13
+        // line 14
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("security_login");
         echo "\" method=\"post\">
             <label for=\"username\">Username:</label>
@@ -101,7 +93,7 @@ class __TwigTemplate_ff2045897cf2bcefab4b289662133bc57f77759e0424d19fbd226460cd5
 
     public function getDebugInfo()
     {
-        return array (  70 => 13,  67 => 12,  61 => 10,  59 => 9,  53 => 5,  44 => 4,  15 => 1,);
+        return array (  62 => 14,  59 => 13,  53 => 5,  44 => 4,  15 => 1,);
     }
 
     public function getSourceContext()
@@ -114,9 +106,10 @@ class __TwigTemplate_ff2045897cf2bcefab4b289662133bc57f77759e0424d19fbd226460cd5
 
         <h1>Connection page</h1>
 
-        {% if error %}
+       {# {% if error %}
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
+        #}
 
         <form action=\"{{ path('security_login') }}\" method=\"post\">
             <label for=\"username\">Username:</label>

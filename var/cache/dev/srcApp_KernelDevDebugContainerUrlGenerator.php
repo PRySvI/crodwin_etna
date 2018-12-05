@@ -21,6 +21,7 @@ class srcApp_KernelDevDebugContainerUrlGenerator extends Symfony\Component\Routi
         if (null === self::$declaredRoutes) {
             self::$declaredRoutes = array(
         'project_create' => array(array(), array('_controller' => 'App\\Controller\\ProjectController::create'), array(), array(array('text', '/project_create')), array(), array()),
+        'done_page' => array(array(), array('_controller' => 'App\\Controller\\ProjectController::created'), array(), array(array('text', '/done')), array(), array()),
         'security_registration' => array(array(), array('_controller' => 'App\\Controller\\SecurityController::registration'), array(), array(array('text', '/inscription')), array(), array()),
         'security_login' => array(array(), array('_controller' => 'App\\Controller\\SecurityController::login'), array(), array(array('text', '/connection')), array(), array()),
         'security_logout' => array(array(), array('_controller' => 'App\\Controller\\SecurityController::logout'), array(), array(array('text', '/logout')), array(), array()),

@@ -90,49 +90,56 @@ class __TwigTemplate_ddc2956cf11e11642e0317c2d1382e7fc7b5a24f29ea1e774f138ad2da4
     <div>
         ";
         // line 12
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 12, $this->source); })()), "name", array()), 'row');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 12, $this->source); })()), "name", array()), 'label');
         echo "
         ";
         // line 13
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 13, $this->source); })()), "name", array()), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 13, $this->source); })()), "name", array()), 'errors');
         echo "
         ";
         // line 14
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 14, $this->source); })()), "name", array()), 'errors');
-        echo "
-        ";
-        // line 15
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 15, $this->source); })()), "name", array()), 'widget');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 14, $this->source); })()), "name", array()), 'widget');
         echo "
     </div>
 
     <div>
         ";
+        // line 18
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 18, $this->source); })()), "url", array()), 'label');
+        echo "
+        ";
         // line 19
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 19, $this->source); })()), "url", array()), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 19, $this->source); })()), "url", array()), 'errors');
         echo "
         ";
         // line 20
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 20, $this->source); })()), "url", array()), 'errors');
-        echo "
-        ";
-        // line 21
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 21, $this->source); })()), "url", array()), 'widget');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 20, $this->source); })()), "url", array()), 'widget');
         echo "
     </div>
 
     <div>
         ";
+        // line 24
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 24, $this->source); })()), "publicVisible", array()), 'label');
+        echo "
+        ";
         // line 25
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 25, $this->source); })()), "publicVisible", array()), 'label');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 25, $this->source); })()), "publicVisible", array()), 'errors');
         echo "
         ";
         // line 26
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 26, $this->source); })()), "publicVisible", array()), 'errors');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 26, $this->source); })()), "publicVisible", array()), 'widget');
+        echo "
+    </div>
+    <div>
+
+        ";
+        // line 30
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 30, $this->source); })()), "defaultLang", array()), 'errors');
         echo "
         ";
-        // line 27
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 27, $this->source); })()), "publicVisible", array()), 'widget');
+        // line 31
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 31, $this->source); })()), "defaultLang", array()), 'widget');
         echo "
     </div>
 
@@ -141,11 +148,11 @@ class __TwigTemplate_ddc2956cf11e11642e0317c2d1382e7fc7b5a24f29ea1e774f138ad2da4
         <label>Default language</label>
         <select name=\"default_lang\">
             ";
-        // line 34
+        // line 38
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["languages"]) || array_key_exists("languages", $context) ? $context["languages"] : (function () { throw new Twig_Error_Runtime('Variable "languages" does not exist.', 34, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["languages"]) || array_key_exists("languages", $context) ? $context["languages"] : (function () { throw new Twig_Error_Runtime('Variable "languages" does not exist.', 38, $this->source); })()));
         foreach ($context['_seq'] as $context["code"] => $context["fullname"]) {
-            // line 35
+            // line 39
             echo "            <option value=\"";
             echo twig_escape_filter($this->env, $context["code"], "html", null, true);
             echo "\">";
@@ -156,7 +163,7 @@ class __TwigTemplate_ddc2956cf11e11642e0317c2d1382e7fc7b5a24f29ea1e774f138ad2da4
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['code'], $context['fullname'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 37
+        // line 41
         echo "        </select>
 
     </div>
@@ -165,13 +172,13 @@ class __TwigTemplate_ddc2956cf11e11642e0317c2d1382e7fc7b5a24f29ea1e774f138ad2da4
     <div >
         <div class=\"form-group\">
             <label> Translate to Languages</label>
-            <select id=\"ms\" name=\"choised_lang\" multiple=\"multiple\">
+            <select id=\"ms\" name=\"choised_lang[]\" multiple=\"multiple\">
                 ";
-        // line 46
+        // line 50
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["languages"]) || array_key_exists("languages", $context) ? $context["languages"] : (function () { throw new Twig_Error_Runtime('Variable "languages" does not exist.', 46, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["languages"]) || array_key_exists("languages", $context) ? $context["languages"] : (function () { throw new Twig_Error_Runtime('Variable "languages" does not exist.', 50, $this->source); })()));
         foreach ($context['_seq'] as $context["code"] => $context["fullname"]) {
-            // line 47
+            // line 51
             echo "                    <option value=\"";
             echo twig_escape_filter($this->env, $context["code"], "html", null, true);
             echo "\">";
@@ -182,7 +189,7 @@ class __TwigTemplate_ddc2956cf11e11642e0317c2d1382e7fc7b5a24f29ea1e774f138ad2da4
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['code'], $context['fullname'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 49
+        // line 53
         echo "
             </select>
         </div>
@@ -192,18 +199,18 @@ class __TwigTemplate_ddc2956cf11e11642e0317c2d1382e7fc7b5a24f29ea1e774f138ad2da4
     <!--<button  type=\"submit\" >OKAY</button>-->
     <div>
         ";
-        // line 57
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 57, $this->source); })()), "submit", array()), 'widget');
+        // line 61
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 61, $this->source); })()), "submit", array()), 'widget');
         echo "
     </div>
 
 </div>
 ";
-        // line 61
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 61, $this->source); })()), 'form_end');
+        // line 65
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formP"]) || array_key_exists("formP", $context) ? $context["formP"] : (function () { throw new Twig_Error_Runtime('Variable "formP" does not exist.', 65, $this->source); })()), 'form_end');
         echo "
     ";
-        // line 62
+        // line 66
         $this->displayBlock('javascripts', $context, $blocks);
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -221,12 +228,12 @@ class __TwigTemplate_ddc2956cf11e11642e0317c2d1382e7fc7b5a24f29ea1e774f138ad2da4
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 63
+        // line 67
         echo "        <script src=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/jquery.min.js"), "html", null, true);
         echo "\"></script>
         <script src=\"";
-        // line 64
+        // line 68
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/multiple-select.js"), "html", null, true);
         echo "\"></script>
         <script>
@@ -259,7 +266,7 @@ class __TwigTemplate_ddc2956cf11e11642e0317c2d1382e7fc7b5a24f29ea1e774f138ad2da4
 
     public function getDebugInfo()
     {
-        return array (  230 => 64,  225 => 63,  207 => 62,  203 => 61,  196 => 57,  186 => 49,  175 => 47,  171 => 46,  160 => 37,  149 => 35,  145 => 34,  135 => 27,  131 => 26,  127 => 25,  120 => 21,  116 => 20,  112 => 19,  105 => 15,  101 => 14,  97 => 13,  93 => 12,  86 => 8,  81 => 7,  72 => 6,  60 => 4,  55 => 3,  46 => 2,  15 => 1,);
+        return array (  237 => 68,  232 => 67,  214 => 66,  210 => 65,  203 => 61,  193 => 53,  182 => 51,  178 => 50,  167 => 41,  156 => 39,  152 => 38,  142 => 31,  138 => 30,  131 => 26,  127 => 25,  123 => 24,  116 => 20,  112 => 19,  108 => 18,  101 => 14,  97 => 13,  93 => 12,  86 => 8,  81 => 7,  72 => 6,  60 => 4,  55 => 3,  46 => 2,  15 => 1,);
     }
 
     public function getSourceContext()
@@ -275,7 +282,6 @@ class __TwigTemplate_ddc2956cf11e11642e0317c2d1382e7fc7b5a24f29ea1e774f138ad2da4
 
 <div class=\"container\">
     <div>
-        {{form_row(formP.name)}}
         {{ form_label(formP.name) }}
         {{ form_errors(formP.name) }}
         {{ form_widget(formP.name) }}
@@ -291,6 +297,11 @@ class __TwigTemplate_ddc2956cf11e11642e0317c2d1382e7fc7b5a24f29ea1e774f138ad2da4
         {{ form_label(formP.publicVisible) }}
         {{ form_errors(formP.publicVisible) }}
         {{ form_widget(formP.publicVisible) }}
+    </div>
+    <div>
+
+        {{ form_errors(formP.defaultLang) }}
+        {{ form_widget(formP.defaultLang) }}
     </div>
 
 
@@ -308,7 +319,7 @@ class __TwigTemplate_ddc2956cf11e11642e0317c2d1382e7fc7b5a24f29ea1e774f138ad2da4
     <div >
         <div class=\"form-group\">
             <label> Translate to Languages</label>
-            <select id=\"ms\" name=\"choised_lang\" multiple=\"multiple\">
+            <select id=\"ms\" name=\"choised_lang[]\" multiple=\"multiple\">
                 {% for code , fullname in languages %}
                     <option value=\"{{ code }}\">{{ fullname }}</option>
                 {% endfor %}

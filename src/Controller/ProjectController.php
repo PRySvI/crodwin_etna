@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Language;
 use App\Entity\Project;
+use App\Entity\User;
 use App\Form\ProjectType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,31 +28,34 @@ class ProjectController extends AbstractController
     {
 
         $project = new Project();
+        $user = $this->getUser();
 
-        $form = $this->createForm(ProjectType::class,$project);
+        $form = $this->createForm(ProjectType::class,$project );
 
         $form -> handleRequest($request);
 
         if($form->isSubmitted())
         {
             $project=$form->getData();
-            $def_lang = $request->get("default_lang");
-            $langs = $request->get("choised_lang");
+            $project->setDefaultLang($request->get("default_lang"));
 
-            //$project->setLanguages($langs)
+            if ($user!=null) {
+                // check si on est pas Annonyme
+                $project->setUserId($user->getId());
+            }
+
+            $langsList = $request->get("choised_lang");
+
+            foreach ($langsList as $key=>$value)
+            {
+                $project->addLanguage($value);
+            };
             dump($project);
-            dump($def_lang);
-            dump($langs);
-            $langs = $request->get("choised_lang");
-            dump($langs);
-            /*$def_l = $form['def_l']->getData();
-            $ms = $form['ms']->getData();
-            dump("def_l ".def_l);
-            dump("ms ".ms);
-            $project->setDefaultLang();
+
+
             $menager->persist($project);
-            $menager->flush();*/
-            //return $this->redirectToRoute('security_login');
+            $menager->flush();
+            return $this->redirectToRoute('done_page');
         }
 
         return $this->render('project/project_create.html.twig', [
@@ -60,4 +64,13 @@ class ProjectController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/done", name="done_page")
+     */
+    public function created()
+    {
+        return $this->render('project/index.html.twig', [
+            'controller_name' => 'SecurityController',
+        ]);
+    }
 }
