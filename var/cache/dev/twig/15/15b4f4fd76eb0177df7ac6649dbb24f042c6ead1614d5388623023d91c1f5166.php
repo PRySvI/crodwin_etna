@@ -42,10 +42,14 @@ class __TwigTemplate_30b638d6104f5d988f3dbce0ba36064922aa531c1dca3bc75deca3a7523
         // line 6
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/bootstrap.min.css"), "html", null, true);
         echo "\">
-        ";
+        <link rel=\"stylesheet\" href=\"";
         // line 7
-        $this->displayBlock('stylesheets', $context, $blocks);
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/css.css"), "html", null, true);
+        echo "\">
+        ";
         // line 8
+        $this->displayBlock('stylesheets', $context, $blocks);
+        // line 9
         echo "    </head>
     <body>
         <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">
@@ -67,7 +71,7 @@ class __TwigTemplate_30b638d6104f5d988f3dbce0ba36064922aa531c1dca3bc75deca3a7523
                     </li>
                     <li class=\"nav-item\">
                         <a class=\"nav-link\" href=\"";
-        // line 28
+        // line 29
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("project_create");
         echo "\">Cree un projet</a>
                     </li>
@@ -79,12 +83,12 @@ class __TwigTemplate_30b638d6104f5d988f3dbce0ba36064922aa531c1dca3bc75deca3a7523
             </div>
         </nav>
         ";
-        // line 37
-        $this->displayBlock('body', $context, $blocks);
         // line 38
+        $this->displayBlock('body', $context, $blocks);
+        // line 39
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 39
+        // line 40
         echo "    </body>
 </html>
 ";
@@ -114,7 +118,7 @@ class __TwigTemplate_30b638d6104f5d988f3dbce0ba36064922aa531c1dca3bc75deca3a7523
 
     }
 
-    // line 7
+    // line 8
     public function block_stylesheets($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -131,7 +135,7 @@ class __TwigTemplate_30b638d6104f5d988f3dbce0ba36064922aa531c1dca3bc75deca3a7523
 
     }
 
-    // line 37
+    // line 38
     public function block_body($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -148,7 +152,7 @@ class __TwigTemplate_30b638d6104f5d988f3dbce0ba36064922aa531c1dca3bc75deca3a7523
 
     }
 
-    // line 38
+    // line 39
     public function block_javascripts($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -177,7 +181,7 @@ class __TwigTemplate_30b638d6104f5d988f3dbce0ba36064922aa531c1dca3bc75deca3a7523
 
     public function getDebugInfo()
     {
-        return array (  152 => 38,  135 => 37,  118 => 7,  100 => 5,  88 => 39,  85 => 38,  83 => 37,  71 => 28,  49 => 8,  47 => 7,  43 => 6,  39 => 5,  33 => 1,);
+        return array (  156 => 39,  139 => 38,  122 => 8,  104 => 5,  92 => 40,  89 => 39,  87 => 38,  75 => 29,  53 => 9,  51 => 8,  47 => 7,  43 => 6,  39 => 5,  33 => 1,);
     }
 
     public function getSourceContext()
@@ -188,6 +192,7 @@ class __TwigTemplate_30b638d6104f5d988f3dbce0ba36064922aa531c1dca3bc75deca3a7523
         <meta charset=\"UTF-8\">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel=\"stylesheet\" href=\"{{ asset('css/bootstrap.min.css') }}\">
+        <link rel=\"stylesheet\" href=\"{{ asset('css/css.css') }}\">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>

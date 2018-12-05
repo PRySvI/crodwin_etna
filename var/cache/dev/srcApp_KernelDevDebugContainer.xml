@@ -4338,6 +4338,12 @@
         <argument>make:migration</argument>
       </call>
     </service>
+    <service id=".service_locator.FQfUlQz" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="menager" type="service" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
     <service id=".service_locator.p0rY3uv" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -4351,11 +4357,13 @@
         <argument key="authUtils" type="service" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.LpFaY_g" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.Zdknpb." class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Controller\ProjectController::create" type="service" id=".service_locator.FQfUlQz"/>
         <argument key="App\Controller\SecurityController::login" type="service" id=".service_locator.d24Amjx"/>
         <argument key="App\Controller\SecurityController::registration" type="service" id=".service_locator.p0rY3uv"/>
+        <argument key="App\Controller\ProjectController:create" type="service" id=".service_locator.FQfUlQz"/>
         <argument key="App\Controller\SecurityController:login" type="service" id=".service_locator.d24Amjx"/>
         <argument key="App\Controller\SecurityController:registration" type="service" id=".service_locator.p0rY3uv"/>
       </argument>
@@ -4536,7 +4544,7 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.LpFaY_g"/>
+      <argument type="service" id=".service_locator.Zdknpb."/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
@@ -4960,7 +4968,7 @@
     <service id="ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\FilterEagerLoadingExtension" alias="api_platform.doctrine.orm.query_extension.filter_eager_loading"/>
     <service id="ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\PaginationExtension" alias="api_platform.doctrine.orm.query_extension.pagination"/>
     <service id="ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\OrderExtension" alias="api_platform.doctrine.orm.query_extension.order"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.LpFaY_g"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.Zdknpb."/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger" public="false"/>
