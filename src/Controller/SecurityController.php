@@ -70,7 +70,7 @@ class SecurityController extends AbstractController
      */
     public function index()
     {
-        return $this->render('project/index.html.twig', [
+        return $this->render('security/hello.html.twig', [
             'controller_name' => 'SecurityController',
         ]);
     }

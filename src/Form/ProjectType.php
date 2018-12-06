@@ -24,8 +24,8 @@ class ProjectType extends AbstractType
             ->add('name')
             ->add('url')
             ->add('publicVisible',CheckboxType::class, array(
-        'label'    => 'Project is public?',
-        'required' => false,
+                'label'    => 'Is this a public project ?',
+                'required' => false,
     ))
             ->add('defaultLang', ChoiceType::class, array(
                 'choices' => array_count_values(Language::getAllLocales()),
@@ -37,7 +37,9 @@ class ProjectType extends AbstractType
                 'attr' => ['class' => '.ms-choice.disabled'],
             ])*/
 
-            ->add('file', FileType::class, array('label' => 'Your file to translate'))
+            ->add('file', FileType::class, array(
+                'label' => 'Your file to translate'
+            ))
             ->add('submit', SubmitType::class, [
                 'label' => 'Create',
                 'attr' => ['class' => 'btn btn-default pull-right'],
