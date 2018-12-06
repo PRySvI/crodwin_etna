@@ -10,6 +10,11 @@ class Language
      */
 
     public static $locale = array(
+        'fr_FR' => 'French (France)',
+        'fr_BE' => 'French (Belgium)',
+        'fr_CA' => 'French (Canada)',
+        'fr_LU' => 'French (Luxembourg)',
+        'fr_CH' => 'French (Switzerland)',
         'aa_DJ' => 'Afar (Djibouti)',
         'aa_ER' => 'Afar (Eritrea)',
         'aa_ET' => 'Afar (Ethiopia)',
@@ -95,11 +100,6 @@ class Language
         'fo_FO' => 'Faroese (Faroe Islands)',
         'fil_PH' => 'Filipino (Philippines)',
         'fi_FI' => 'Finnish (Finland)',
-        'fr_BE' => 'French (Belgium)',
-        'fr_CA' => 'French (Canada)',
-        'fr_FR' => 'French (France)',
-        'fr_LU' => 'French (Luxembourg)',
-        'fr_CH' => 'French (Switzerland)',
         'fur_IT' => 'Friulian (Italy)',
         'ff_SN' => 'Fulah (Senegal)',
         'gl_ES' => 'Galician (Spain)',
@@ -257,5 +257,15 @@ class Language
     public static function getAllLocales(): array
     {
         return self::$locale;
+    }
+
+    public static function getValueByKey($key)
+    {
+        return self::$locale[$key];
+    }
+
+    public static function getValueByIndex($index)
+    {
+       return array_values(self::$locale)[$index];
     }
 }

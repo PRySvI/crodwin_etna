@@ -53,42 +53,57 @@ class __TwigTemplate_30b638d6104f5d988f3dbce0ba36064922aa531c1dca3bc75deca3a7523
         echo "    </head>
     <body>
         <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">
-            <a class=\"navbar-brand\" href=\"#\">Crowdin</a>
+            <a class=\"navbar-brand\" href=\"";
+        // line 12
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("hello_page");
+        echo "\">Crowdin</a>
             <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarColor03\" aria-controls=\"navbarColor03\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
                 <span class=\"navbar-toggler-icon\"></span>
             </button>
 
             <div class=\"collapse navbar-collapse\" id=\"navbarColor03\">
                 <ul class=\"navbar-nav mr-auto\">
-                    <li class=\"nav-item active\">
-                        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>
-                    </li>
                     <li class=\"nav-item\">
-                        <a class=\"nav-link\" href=\"#\">Features</a>
-                    </li>
-                    <li class=\"nav-item\">
-                        <a class=\"nav-link\" href=\"#\">Pricing</a>
+                        <a class=\"nav-link\" href=\"";
+        // line 20
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("security_registration");
+        echo "\">Inscription</a>
                     </li>
                     <li class=\"nav-item\">
                         <a class=\"nav-link\" href=\"";
-        // line 29
+        // line 23
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("project_create");
-        echo "\">Cree un projet</a>
+        echo "\">Création d'un projet</a>
                     </li>
                 </ul>
                 <form class=\"form-inline my-2 my-lg-0\">
+                    <div class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"";
+        // line 28
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("security_login");
+        echo "\">Connexion</a>
+                    </div>
+                    <div class=\"nav-item\">
+                        <a class=\"nav-link disabled\" href=\"";
+        // line 31
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("security_logout");
+        echo "\">Déconnexion</a>
+                    </div>
                     <input class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\">
-                    <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>
+                    <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Recherche</button>
                 </form>
             </div>
         </nav>
+        <div class=\"container\">
         ";
-        // line 38
-        $this->displayBlock('body', $context, $blocks);
         // line 39
-        echo "        ";
-        $this->displayBlock('javascripts', $context, $blocks);
+        $this->displayBlock('body', $context, $blocks);
         // line 40
+        echo "        </div>
+        ";
+        // line 41
+        $this->displayBlock('javascripts', $context, $blocks);
+        // line 42
         echo "    </body>
 </html>
 ";
@@ -135,7 +150,7 @@ class __TwigTemplate_30b638d6104f5d988f3dbce0ba36064922aa531c1dca3bc75deca3a7523
 
     }
 
-    // line 38
+    // line 39
     public function block_body($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -152,7 +167,7 @@ class __TwigTemplate_30b638d6104f5d988f3dbce0ba36064922aa531c1dca3bc75deca3a7523
 
     }
 
-    // line 39
+    // line 41
     public function block_javascripts($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -181,7 +196,7 @@ class __TwigTemplate_30b638d6104f5d988f3dbce0ba36064922aa531c1dca3bc75deca3a7523
 
     public function getDebugInfo()
     {
-        return array (  156 => 39,  139 => 38,  122 => 8,  104 => 5,  92 => 40,  89 => 39,  87 => 38,  75 => 29,  53 => 9,  51 => 8,  47 => 7,  43 => 6,  39 => 5,  33 => 1,);
+        return array (  171 => 41,  154 => 39,  137 => 8,  119 => 5,  107 => 42,  105 => 41,  102 => 40,  100 => 39,  89 => 31,  83 => 28,  75 => 23,  69 => 20,  58 => 12,  53 => 9,  51 => 8,  47 => 7,  43 => 6,  39 => 5,  33 => 1,);
     }
 
     public function getSourceContext()
@@ -197,33 +212,35 @@ class __TwigTemplate_30b638d6104f5d988f3dbce0ba36064922aa531c1dca3bc75deca3a7523
     </head>
     <body>
         <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">
-            <a class=\"navbar-brand\" href=\"#\">Crowdin</a>
+            <a class=\"navbar-brand\" href=\"{{ path('hello_page') }}\">Crowdin</a>
             <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarColor03\" aria-controls=\"navbarColor03\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
                 <span class=\"navbar-toggler-icon\"></span>
             </button>
 
             <div class=\"collapse navbar-collapse\" id=\"navbarColor03\">
                 <ul class=\"navbar-nav mr-auto\">
-                    <li class=\"nav-item active\">
-                        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"{{ path('security_registration') }}\">Inscription</a>
                     </li>
                     <li class=\"nav-item\">
-                        <a class=\"nav-link\" href=\"#\">Features</a>
-                    </li>
-                    <li class=\"nav-item\">
-                        <a class=\"nav-link\" href=\"#\">Pricing</a>
-                    </li>
-                    <li class=\"nav-item\">
-                        <a class=\"nav-link\" href=\"{{ path('project_create') }}\">Cree un projet</a>
+                        <a class=\"nav-link\" href=\"{{ path('project_create') }}\">Création d'un projet</a>
                     </li>
                 </ul>
                 <form class=\"form-inline my-2 my-lg-0\">
+                    <div class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"{{ path('security_login') }}\">Connexion</a>
+                    </div>
+                    <div class=\"nav-item\">
+                        <a class=\"nav-link disabled\" href=\"{{ path('security_logout') }}\">Déconnexion</a>
+                    </div>
                     <input class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\">
-                    <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>
+                    <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Recherche</button>
                 </form>
             </div>
         </nav>
+        <div class=\"container\">
         {% block body %}{% endblock %}
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

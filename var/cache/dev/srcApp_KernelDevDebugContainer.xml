@@ -71,6 +71,7 @@
     <parameter key="kernel.container_class">srcApp_KernelDevDebugContainer</parameter>
     <parameter key="container.dumper.inline_class_loader">true</parameter>
     <parameter key="env(DATABASE_URL)"></parameter>
+    <parameter key="files_directory">/mnt/DATA/ETNA/Projets 2018/Crowdin/public/uploads/files</parameter>
     <parameter key="fragment.renderer.hinclude.global_template"></parameter>
     <parameter key="fragment.path">/_fragment</parameter>
     <parameter key="kernel.secret">%env(APP_SECRET)%</parameter>
@@ -3317,8 +3318,8 @@
       <call method="setOptions">
         <argument type="collection">
           <argument key="login_path">security_login</argument>
-          <argument key="always_use_default_target_path">false</argument>
-          <argument key="default_target_path">/</argument>
+          <argument key="always_use_default_target_path">true</argument>
+          <argument key="default_target_path">hello_page</argument>
           <argument key="target_path_parameter">_target_path</argument>
           <argument key="use_referer">false</argument>
         </argument>

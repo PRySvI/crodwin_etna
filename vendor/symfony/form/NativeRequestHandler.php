@@ -124,7 +124,7 @@ class NativeRequestHandler implements RequestHandlerInterface
     public function isFileUpload($data)
     {
         // POST data will always be strings or arrays of strings. Thus, we can be sure
-        // that the submitted data is a file upload if the "error" value is an integer
+        // that the submitted data is a file uploads if the "error" value is an integer
         // (this value must have been injected by PHP itself).
         return \is_array($data) && isset($data['error']) && \is_int($data['error']);
     }
@@ -198,9 +198,9 @@ class NativeRequestHandler implements RequestHandlerInterface
     /**
      * Sets empty uploaded files to NULL in the given uploaded files array.
      *
-     * @param mixed $data The file upload data
+     * @param mixed $data The file uploads data
      *
-     * @return array|null Returns the stripped upload data
+     * @return array|null Returns the stripped uploads data
      */
     private static function stripEmptyFiles($data)
     {

@@ -10,10 +10,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
-
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ProjectController extends AbstractController
@@ -27,6 +26,7 @@ class ProjectController extends AbstractController
     public function create(Request $request, ObjectManager $menager)
     {
 
+
         $project = new Project();
         $user = $this->getUser();
 
@@ -37,8 +37,19 @@ class ProjectController extends AbstractController
         if($form->isSubmitted())
         {
             $project=$form->getData();
-            $project->setDefaultLang($request->get("default_lang"));
+            #$project->setDefaultLang($request->get("default_lang"));
+            //Partie de chargement du fichier
 
+            /** @var UploadedFile $file */
+            $file = $form->get('file')->getData();
+            //$file=$project->getFile();
+            $fileName = $file->getClientOriginalName().'.'.$this->generateUniqueFileName().'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('files_directory'),
+                $fileName
+            );
+            $project->setFile($fileName);
+            //
             if ($user!=null) {
                 // check si on est pas Annonyme
                 $project->setUserId($user->getId());
@@ -50,6 +61,7 @@ class ProjectController extends AbstractController
             {
                 $project->addLanguage($value);
             };
+            //dump(Language::getValueByIndex($form->get('defaultLang')->getData()));
             dump($project);
 
 
@@ -62,6 +74,14 @@ class ProjectController extends AbstractController
             'formP'=>$form->createView(), // On envoi la forme dans le twig
             'languages'=>Language::getAllLocales() //on attache toutes les langues a l'envoi
         ]);
+    }
+
+    /**
+     * @return string
+     */
+    private function generateUniqueFileName()
+    {
+        return md5(uniqid());
     }
 
     /**

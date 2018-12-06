@@ -40,7 +40,7 @@ class __TwigTemplate_ff2045897cf2bcefab4b289662133bc57f77759e0424d19fbd226460cd5
 
     }
 
-    // line 4
+    // line 3
     public function block_body($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -49,26 +49,27 @@ class __TwigTemplate_ff2045897cf2bcefab4b289662133bc57f77759e0424d19fbd226460cd5
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        // line 5
+        // line 4
         echo "
 
-        <h1>Connection page</h1>
+        <h1>Connexion</h1>
 
        ";
-        // line 13
+        // line 12
         echo "
         <form action=\"";
-        // line 14
+        // line 13
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("security_login");
         echo "\" method=\"post\">
-            <label for=\"username\">Username:</label>
-            <input type=\"text\" id=\"username\" name=\"_username\" />
+            <label for=\"username\">Pseudo :</label>
+            <input type=\"text\" class=\"form-control\" id=\"username\" name=\"_username\" />
 
-            <label for=\"password\">Password:</label>
-            <input type=\"password\" id=\"password\" name=\"_password\" />
-
+            <label for=\"password\">Mot de passe:</label>
+            <input type=\"password\" class=\"form-control\" id=\"password\" name=\"_password\" />
+            <br/>
             <input type=\"hidden\" name=\"_target_path\" value=\"/connection\" />
-            <button type=\"submit\">login</button>
+            <button type=\"submit\" class=\"form-group btn btn-success\">Se connecter</button>
+
         </form>
 
 
@@ -93,18 +94,17 @@ class __TwigTemplate_ff2045897cf2bcefab4b289662133bc57f77759e0424d19fbd226460cd5
 
     public function getDebugInfo()
     {
-        return array (  62 => 14,  59 => 13,  53 => 5,  44 => 4,  15 => 1,);
+        return array (  62 => 13,  59 => 12,  53 => 4,  44 => 3,  15 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Twig_Source("{% extends 'base.html.twig' %}
 
-
 {% block body %}
 
 
-        <h1>Connection page</h1>
+        <h1>Connexion</h1>
 
        {# {% if error %}
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -112,14 +112,15 @@ class __TwigTemplate_ff2045897cf2bcefab4b289662133bc57f77759e0424d19fbd226460cd5
         #}
 
         <form action=\"{{ path('security_login') }}\" method=\"post\">
-            <label for=\"username\">Username:</label>
-            <input type=\"text\" id=\"username\" name=\"_username\" />
+            <label for=\"username\">Pseudo :</label>
+            <input type=\"text\" class=\"form-control\" id=\"username\" name=\"_username\" />
 
-            <label for=\"password\">Password:</label>
-            <input type=\"password\" id=\"password\" name=\"_password\" />
-
+            <label for=\"password\">Mot de passe:</label>
+            <input type=\"password\" class=\"form-control\" id=\"password\" name=\"_password\" />
+            <br/>
             <input type=\"hidden\" name=\"_target_path\" value=\"/connection\" />
-            <button type=\"submit\">login</button>
+            <button type=\"submit\" class=\"form-group btn btn-success\">Se connecter</button>
+
         </form>
 
 

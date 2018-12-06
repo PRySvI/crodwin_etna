@@ -46,6 +46,11 @@ class Project
      */
     private $public_visible;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $file;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -128,6 +133,18 @@ class Project
     public function setPublicVisible(bool $public_visible): self
     {
         $this->public_visible = $public_visible;
+
+        return $this;
+    }
+
+    public function getFile(): ?string
+    {
+        return $this->file;
+    }
+
+    public function setFile(?string $file): self
+    {
+        $this->file = $file;
 
         return $this;
     }

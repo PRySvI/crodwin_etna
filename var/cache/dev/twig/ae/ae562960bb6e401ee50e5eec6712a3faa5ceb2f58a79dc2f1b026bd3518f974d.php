@@ -77,7 +77,7 @@ class __TwigTemplate_9042aff54c37936efa9e510a143ecabb3dbde5ab45875658ea2a081027c
 </style>
 
 <div class=\"example-wrapper\">
-    <h1>Okay project created! ✅</h1>
+    <h1>Okay ! ✅</h1>
 </div>
 ";
         
@@ -116,7 +116,7 @@ class __TwigTemplate_9042aff54c37936efa9e510a143ecabb3dbde5ab45875658ea2a081027c
 </style>
 
 <div class=\"example-wrapper\">
-    <h1>Okay project created! ✅</h1>
+    <h1>Okay ! ✅</h1>
 </div>
 {% endblock %}
 ", "project/index.html.twig", "/mnt/DATA/ETNA/Projets 2018/Crowdin/templates/project/index.html.twig");

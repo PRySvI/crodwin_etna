@@ -21,27 +21,32 @@
         {{ form_widget(formP.url) }}
     </div>
 
+    <br>
     <div>
         {{ form_label(formP.publicVisible) }}
         {{ form_errors(formP.publicVisible) }}
         {{ form_widget(formP.publicVisible) }}
+        {{ form_help(formP.publicVisible) }}
     </div>
+    <br>
     <div>
-
+        {{ form_label(formP.defaultLang) }}
         {{ form_errors(formP.defaultLang) }}
         {{ form_widget(formP.defaultLang) }}
+        {{ form_help(formP.defaultLang) }}
     </div>
-
+    <br>
 
     <div>
-        <label>Default language</label>
-        <select name="default_lang">
-            {% for code , fullname in languages %}
-            <option value="{{ code }}">{{ fullname }}</option>
-            {% endfor %}
-        </select>
-
+        {{ form_row(formP.file) }}
     </div>
+
+    {#<div>
+        {{ form_label(formP.languages) }}
+        {{ form_errors(formP.languages) }}
+        {{ form_widget(formP.languages) }}
+        {{ form_help(formP.languages) }}
+    </div>#}
 
     <form name="sub_form">
     <div >
