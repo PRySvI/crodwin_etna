@@ -80,6 +80,11 @@
                     width: '100%'
                 });
             });
+            // Permet d'afficher le nom du fichier uploadé (bug bootstrap)
+            $(document).on('change', '.custom-file-input', function () {
+                let fileName = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+                $(this).parent('.custom-file').find('.custom-file-label').text(fileName);
+            });
         </script>
         {% endblock %}
 {% endblock %}
