@@ -30,6 +30,9 @@ security:
               path: security_logout
               target: home
 
+            remember_me:
+              secret:   '%kernel.secret%'
+              lifetime: 2592000 # 30 jours
             # activate different ways to authenticate
 
             # http_basic: true
