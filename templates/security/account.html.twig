@@ -3,8 +3,24 @@
 
 {% block body %}
 
+    <h1 class="col-md-auto" > Profil page : {{ app.user.username }} </h1>
 
-        <h1>Connection page</h1>
+    <form action="#" method="post">
+        <label for="username">Your e-mail :</label>
+        <input type="text" class="form-control" id="username" name="_username" />
+        <label for="username">Your new e-mail :</label>
+        <input type="text" class="form-control" id="username" name="_username" />
+        <input type="hidden" name="_target_path" value="/connection" />
+        <button type="submit" class="form-group btn btn-success">Modifier</button>
+        <br/>
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="_password" />
+        <label for="password">Your new password:</label>
+        <input type="password" class="form-control" id="password" name="_password" />
+        <input type="hidden" name="_target_path" value="/connection" />
+        <button type="submit" class="form-group btn btn-success">Modifier</button>
+
+    </form>
 
 
 
