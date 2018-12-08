@@ -85,4 +85,14 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/account", name="account")
+     */
+    public function account()
+    {
+        return $this->render('security/account.html.twig', [
+            'controller_name' => 'SecurityController',
+        ]);
+    }
+
 }

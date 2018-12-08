@@ -25,10 +25,13 @@ security:
               always_use_default_target_path: true
               default_target_path: hello_page
 
-
             logout:
               path: security_logout
               target: home
+
+            remember_me:
+              secret:   '%kernel.secret%'
+              lifetime: 2592000 # 30 jours
 
             # activate different ways to authenticate
 
