@@ -26,13 +26,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255 , unique=true)
-     * @Assert\Length(min="8", minMessage="Votre MP doit faire min 8 characters")
-     * @Assert\EqualTo(propertyPath="password_repeat", message="votre doit etre le meme dans les deux champs")
+     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire au minimum 8 caractères")
+     * @Assert\EqualTo(propertyPath="password_repeat", message="Les deux mots de passe renseignés ne correspondent pas")
      */
     private $password;
 
     /**
-     * @Assert\EqualTo(propertyPath="password", message="votre doit etre le meme dans les deux champs")
+     * @Assert\EqualTo(propertyPath="password", message="Les deux mots de passe renseignés ne correspondent pas")
      */
     private $password_repeat;
 
