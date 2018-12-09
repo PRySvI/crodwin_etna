@@ -23,8 +23,7 @@ class SecurityController extends AbstractController
         $form = $this->createForm(RegistrationType::class, $user);
         $form -> handleRequest($request);
 
-        if($form->isSubmitted() && $form -> isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
             $menager->persist($user);
@@ -32,14 +31,16 @@ class SecurityController extends AbstractController
             //Partie d'auto login apres l'inscription
             $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
             $this->container->get('security.token_storage')->setToken($token);
-            $this->get('session')->set('_security_main',serialize($token));
+            $this->get('session')->set('_security_main', serialize($token));
 
-
+            return $this->redirectToRoute('hello_page');
         }
-        return $this ->render('security/registration.html.twig', ['form' => $form->createView()
+        return $this->render('security/registration.html.twig', [
+            'form' => $form->createView()
         ]);
 
     }
+
     /**
      * @Route("/connection", name="security_login")
      */
@@ -51,18 +52,11 @@ class SecurityController extends AbstractController
         // derniere login d'utlisateur
         $lastUsername = $authUtils->getLastUsername();
 
+
         return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,
             'error'         => $error,
         ));
-    }
-
-    /**
-     * @Route("/logout", name="security_logout")
-     */
-    public function logout()
-    {
-
     }
 
     /**
@@ -76,6 +70,14 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/logout", name="security_logout")
+     */
+    public function logout()
+    {
+
+    }
+
+    /**
      * @Route("/home", name="home")
      */
     public function home()
@@ -84,15 +86,4 @@ class SecurityController extends AbstractController
             'controller_name' => 'SecurityController',
         ]);
     }
-
-    /**
-     * @Route("/account", name="account")
-     */
-    public function account()
-    {
-        return $this->render('security/account.html.twig', [
-            'controller_name' => 'SecurityController',
-        ]);
-    }
-
 }

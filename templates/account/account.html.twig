@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% form_theme formDescription 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Mon profil</h1>
+
+    <img src="http://via.placeholder.com/150">
+    <p> Importer une photo de profil </p>
+    <div class="input-group mb-3">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile02">
+            <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+        </div>
+        <div class="input-group-append">
+            <span class="input-group-text" id="">Upload</span>
+        </div>
+    </div>
+    <h3> Votre description </h3>
+    {% if not app.user.description %}
+    <p> Vous n'avez pas encore de description ! </p>
+    {% else %}
+    <p> {{ app.user.description }}</p>
+    {% endif %}
+    <h4>Modifier vos informations</h4>
+    <label for="username">Modifier votre e-mail actuel [{{ app.user.email }}] :</label>
+    <input type="text" class="form-control" id="username" name="_username" placeholder="Votre nouvel e-mail" />
+    <br/>
+    <button type="submit" class="form-group btn btn-outline-primary">Modifier votre e-mail</button>
+    <br/>
+
+    <label for=password>Modifier votre mot de passe :</label>
+    <input type="password" class="form-control" id="password" name="_password" placeholder="Votre nouveau mot de passe" />
+    <br/>
+    <input type="hidden" name="_target_path" />
+    <button type="submit" class="form-group btn btn-outline-primary">Modifier votre mot de passe</button>
+    <br/>
+
+    <label for="description">Modifier votre description :</label>
+    {{ form(formDescription) }}
+
+
+{% endblock %}

@@ -1,0 +1,7 @@
+*****BUG LIST A TRAITER*****
+
+Inscription : 
+- Erreur lorsque le pseudo existe déjà
+
+Account :
+- Mauvais message d'erreur 'mdp identiques" qui s'affichent lors d'une modif d'une description
