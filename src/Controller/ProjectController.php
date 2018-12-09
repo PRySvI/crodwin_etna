@@ -65,8 +65,8 @@ class ProjectController extends AbstractController
             dump($project);
 
 
-            $menager->persist($project);
-            $menager->flush();
+
+
             return $this->redirectToRoute('done_page');
         }
 
