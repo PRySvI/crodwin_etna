@@ -21,7 +21,9 @@ class AccountController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $form = $this->createFormBuilder($user)
                      ->add('description')
-                     ->add('save', SubmitType::class, array('label'=> 'Modifier votre description'))
+                     ->add('save_description', SubmitType::class, array('label'=> 'Modifier votre description'))
+                     ->add('email')
+                     ->add('save_email', SubmitType::class, array('label'=> 'Modifier votre e-mail'))
                      ->getForm();
 
         $form->handleRequest($request);
@@ -30,7 +32,28 @@ class AccountController extends AbstractController
         dump($user);
 
         return $this->render('account/account.html.twig', [
-            'formDescription' => $form->createView()
+            'form' => $form->createView()
         ]);
     }
+/*
+    public function edit_email(Request $request, ObjectManager $manager)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($email);
+
+        $form = $this->createFormBuilder($user)
+            ->add('email')
+            ->add('save', SubmitType::class, array('label'=> 'Modifier votre email'))
+            ->getForm();
+
+        $form->handleRequest($request);
+        $manager->persist($user);
+        $manager->flush();
+
+        return $this->render('account/account.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+**/
 }

@@ -1,10 +1,9 @@
 {% extends 'base.html.twig' %}
-{% form_theme formDescription 'bootstrap_4_layout.html.twig' %}
-
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
 
     <h1>Mon profil</h1>
-
+    {{ form_start(form) }}
     <img src="http://via.placeholder.com/150">
     <p> Importer une photo de profil </p>
     <div class="input-group mb-3">
@@ -24,10 +23,8 @@
     {% endif %}
     <h4>Modifier vos informations</h4>
     <label for="username">Modifier votre e-mail actuel [{{ app.user.email }}] :</label>
-    <input type="text" class="form-control" id="username" name="_username" placeholder="Votre nouvel e-mail" />
-    <br/>
-    <button type="submit" class="form-group btn btn-outline-primary">Modifier votre e-mail</button>
-    <br/>
+    {{ form_row(form.email) }}
+    {{ form_row(form.save_email) }}
 
     <label for=password>Modifier votre mot de passe :</label>
     <input type="password" class="form-control" id="password" name="_password" placeholder="Votre nouveau mot de passe" />
@@ -37,7 +34,9 @@
     <br/>
 
     <label for="description">Modifier votre description :</label>
-    {{ form(formDescription) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.save_description) }}
+    {{ form_end(form) }}
 
 
 {% endblock %}
