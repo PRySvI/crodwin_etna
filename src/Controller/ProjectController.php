@@ -64,8 +64,8 @@ class ProjectController extends AbstractController
             //dump(Language::getValueByIndex($form->get('defaultLang')->getData()));
             dump($project);
 
-
-
+            $menager->persist($project);
+            $menager->flush();
 
             return $this->redirectToRoute('done_page');
         }
