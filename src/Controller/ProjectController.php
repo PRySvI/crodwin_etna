@@ -25,12 +25,10 @@ class ProjectController extends AbstractController
      */
     public function create(Request $request, ObjectManager $menager)
     {
-
-
         $project = new Project();
         $user = $this->getUser();
 
-        $form = $this->createForm(ProjectType::class,$project );
+        $form = $this->createForm(ProjectType::class,$project);
 
         $form -> handleRequest($request);
 
@@ -62,10 +60,11 @@ class ProjectController extends AbstractController
                 $project->addLanguage($value);
             };
             //dump(Language::getValueByIndex($form->get('defaultLang')->getData()));
-            dump($project);
+
 
             $menager->persist($project);
             $menager->flush();
+            dump($project);
 
             return $this->redirectToRoute('done_page');
         }

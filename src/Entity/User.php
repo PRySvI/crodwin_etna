@@ -63,6 +63,11 @@ class User implements UserInterface
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $language = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +159,38 @@ class User implements UserInterface
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getLanguage(): ?array
+    {
+        return $this->language;
+    }
+
+    public function setLanguage(?array $language): self
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    public function getDefaultLang()
+    {
+        return $this->language;
+    }
+
+    public function setDefaultLang($default_lang): self
+    {
+        $this->default_lang = $default_lang;
+
+        return $this;
+    }
+
+    public function addLanguage(string $lang): self
+    {
+
+        array_push($this->language , $lang);
 
         return $this;
     }
