@@ -93,36 +93,23 @@ class AccountController extends AbstractController
         $form = $this->createForm(ChangePasswordType::class,$change_pass);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
 
+        //check si pas anonyme
+        if ($user!=null) {
+            //recupère l'id de l'user
+            $change_pass->setUserId($user->getId());
+            //associe OldPassword au password actuel
+            $change_pass->setOldPassword($user->getPassword());
 
-            $passwordEncoder = $this->get('security.password_encoder');
-            $oldPassword = $request->request->get('etiquettebundle_user')['oldPassword'];
-
-            // Si l'ancien mot de passe est bon
-            if ($form->isSubmitted() && $form->isValid()) {
-                $newEncodedPassword = $passwordEncoder->encodePassword($user, $change_pass->getNewPassword());
-                $user->setPassword($newEncodedPassword);
-
-                $em->persist($user);
-                $em->flush();
-
-                $this->addFlash('notice', 'Votre mot de passe à bien été changé !');
-
-                return $this->redirectToRoute('account');
-            } else {
-                $form->addError(new FormError('Ancien mot de passe incorrect'));
-            }
+            //defini un nouveau mdp (il doit être encodé, là il ne l'est pas)
+            $newEncodedPassword = $encoder->encodePassword($user, $change_pass->getNewPassword());
+            $user->setPassword($newEncodedPassword);
+            $em->persist($user);
+            $em->flush();
         }
 
-        $form->handleRequest($request);
-        //$hash = $encoder->encodePassword($user, $user->getPassword());
-        //$user->setPassword($hash);
-        //$manager->persist($user);
-        //$manager->flush();
-        if ($user!=null) {
-            // check si on est pas Anonyme
-            $change_pass->setUserId($user->getId());
+        if ($change_pass->getOldPassword() != $user->getPassword()) {
+            $form->addError(new FormError('Ancien mot de passe incorrect'));
         }
         dump($change_pass);
         return $this->render('account/change_password.html.twig', [
