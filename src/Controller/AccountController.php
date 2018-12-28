@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ChangePassword;
 use App\Form\ChangePasswordType;
 use Doctrine\Common\Persistence\ObjectManager;
+use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormError;
@@ -51,37 +52,7 @@ class AccountController extends AbstractController
 
     }
 
-    /**
-     * @Route("/change_password", name="change_password")
-     */
-/**    public function change_password(Request $request, ObjectManager $manager)
-    {
-        $changePasswordModel = new ChangePassword();
 
-        $form_pass = $this->createForm($changePasswordModel)
-            ->add('old_password', PasswordType::class)
-            ->add('new_password', RepeatedType::class, array(
-                'type' => 'password',
-                'invalid_message' => 'The password fields must match.',
-                'required' => true,
-                'first_options' => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password')
-            ))
-            ->getForm();
-
-        $form_pass->handleRequest($request);
-        $manager->persist($changePasswordModel);
-        $manager->flush();
-
-        // if ($form_passwd->isSubmitted() && $form_passwd->isValid()) {
-        //     return $this->redirect($this->generateUrl('homepage'));
-        //}
-
-        return $this->render('account/change_password.html.twig', [
-            'form_pass' => $form_pass->createView(),
-        ]);
-    }
-**/
     /**
      * @Route("/change_password", name="change_password")
      */
