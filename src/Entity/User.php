@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -202,6 +204,16 @@ class User implements UserInterface
     protected $resetToken;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="Owner", orphanRemoval=true)
+     */
+    private $projects;
+
+    public function __construct()
+    {
+        $this->projects = new ArrayCollection();
+    }
+
+    /**
      * @return string
      */
     public function getResetToken(): string
@@ -215,5 +227,60 @@ class User implements UserInterface
     public function setResetToken(?string $resetToken): void
     {
         $this->resetToken = $resetToken;
+    }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function getProjectByName($name)
+    {
+        foreach ($this->getProjects() as $project)
+        {
+            if($project->getName()===$name)
+            {
+                return $project;
+            }
+        }
+        return null;
+    }
+
+    public function getProjectById($id)
+    {
+        foreach ($this->getProjects() as $project)
+        {
+            if($project->getId()==$id)
+            {
+                return $project;
+            }
+        }
+        return null;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        if ($this->projects->contains($project)) {
+            $this->projects->removeElement($project);
+            // set the owning side to null (unless already changed)
+            if ($project->getOwner() === $this) {
+                $project->setOwner(null);
+            }
+        }
+
+        return $this;
     }
 }

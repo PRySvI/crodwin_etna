@@ -2902,17 +2902,17 @@
     },
     {
         "name": "symfony/form",
-        "version": "v4.2.0",
-        "version_normalized": "4.2.0.0",
+        "version": "v4.2.1",
+        "version_normalized": "4.2.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/form.git",
-            "reference": "e098c91c7daec1e9da3ffd95164d778ab32f9796"
+            "reference": "5ab767b7732154ca6f45c92e30e081178edf30ad"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/form/zipball/e098c91c7daec1e9da3ffd95164d778ab32f9796",
-            "reference": "e098c91c7daec1e9da3ffd95164d778ab32f9796",
+            "url": "https://api.github.com/repos/symfony/form/zipball/5ab767b7732154ca6f45c92e30e081178edf30ad",
+            "reference": "5ab767b7732154ca6f45c92e30e081178edf30ad",
             "shasum": ""
         },
         "require": {
@@ -2951,7 +2951,7 @@
             "symfony/twig-bridge": "For templating with Twig.",
             "symfony/validator": "For form validation."
         },
-        "time": "2018-11-30T08:55:31+00:00",
+        "time": "2018-12-06T11:36:58+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -4769,8 +4769,8 @@
     },
     {
         "name": "symfony/var-dumper",
-        "version": "v4.2.0",
-        "version_normalized": "4.2.0.0",
+        "version": "v4.2.1",
+        "version_normalized": "4.2.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/var-dumper.git",

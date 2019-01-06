@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Language;
 use App\Entity\Project;
+use App\Entity\Source;
 use App\Entity\User;
 use App\Form\ProjectType;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -12,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -27,6 +29,8 @@ class ProjectController extends AbstractController
     {
         $project = new Project();
         $user = $this->getUser();
+        if($user == null)
+            return;
 
         $form = $this->createForm(ProjectType::class,$project);
 
@@ -38,21 +42,21 @@ class ProjectController extends AbstractController
             #$project->setDefaultLang($request->get("default_lang"));
             //Partie de chargement du fichier
 
-            /** @var UploadedFile $file */
-            $file = $form->get('file')->getData();
+           // /** @var UploadedFile $file */
+           // $file = $form->get('file')->getData();
             //$file=$project->getFile();
-            $fileName = $file->getClientOriginalName().'.'.$this->generateUniqueFileName().'.'.$file->guessExtension();
-            $file->move(
+            //$fileName = $file->getClientOriginalName().'.'.$this->generateUniqueFileName().'.'.$file->guessExtension();
+            /*$file->move(
                 $this->getParameter('files_directory'),
                 $fileName
             );
-            $project->setFile($fileName);
-            //
-            if ($user!=null) {
-                // check si on est pas Annonyme
-                $project->setUserId($user->getId());
-            }
 
+            $src = new Source();
+            $src->setFile($fileName);
+
+            $project->addSource($src);
+            $src->setProject($project);*/
+            $project->setOwner($user);
             $langsList = $request->get("choised_lang");
 
             foreach ($langsList as $key=>$value)
@@ -60,11 +64,9 @@ class ProjectController extends AbstractController
                 $project->addLanguage($value);
             };
             //dump(Language::getValueByIndex($form->get('defaultLang')->getData()));
-
-
+            $user->addProject($project);
             $menager->persist($project);
             $menager->flush();
-            dump($project);
 
             return $this->redirectToRoute('done_page');
         }
@@ -75,6 +77,50 @@ class ProjectController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/project/{slug}", name="show_project_page")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showProject($slug, RequestStack $requestStack)
+    {
+        $user = $this->getUser();
+        if($user == null)
+            return null;
+
+        $project = $user->getProjectByName($slug);
+
+        if($project == null)
+            return null;
+
+        $request = $requestStack->getCurrentRequest();
+        if ($request->request->has('lang_src_list'))
+        {
+            $choised_lang = $request->get("lang_src_list");
+            return $this->redirectToRoute('show_sources',['project_id'=>$project->getId(),'choised_lang'=>$choised_lang]);
+        }
+
+
+        return $this->render('project/show_project.html.twig', [
+            'controller_name' => 'ProjectController',
+            'project_name' =>$project->getName(),
+            'languages'=>$project->getLanguages(),
+            'ico_array'=>$this->renderIcons($project->getLanguages())
+        ]);
+    }
+
+
+    public function renderIcons($ico_langs)
+    {
+        $adaptedArray = array();
+        foreach ($ico_langs as $lang)
+        {
+            $index = strtolower(substr($lang,strlen($lang)-2,strlen($lang)));
+            $fullname = Language::getValueByKey($lang);
+            $adaptedArray[$index] = array($lang , $fullname);
+        }
+        return $adaptedArray;
+    }
     /**
      * @return string
      */

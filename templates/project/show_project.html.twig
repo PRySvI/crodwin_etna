@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('flags/flags.min.css') }}" />
+{% endblock %}
+
+{% block body %}
+
+    <h1>{{  project_name }}</h1><br>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{twig}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <h3>Translations</h3>
+    <form name="sub_form" method="post">
+    <table>
+        <tbody>
+        <tr>
+            {% for key , value in ico_array %}
+            <td> <button value="{{ value[0] }}" type="submit" name="lang_src_list"> <img src="{{ asset('flags/blank.gif') }}" class="flag flag-{{key}}" alt="{{ value[1] }}" /><br>{{ value[1] }} </button> </td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+    </form>
+
+{% endblock %}
+
+{% block title %}
+my project
+{% endblock %}
+

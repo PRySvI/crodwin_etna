@@ -82,7 +82,7 @@ class AccountController extends AbstractController
         if ($change_pass->getOldPassword() != $user->getPassword()) {
             $form->addError(new FormError('Ancien mot de passe incorrect'));
         }
-        dump($change_pass);
+       // dump($change_pass);
         return $this->render('account/change_password.html.twig', [
             'form' => $form->createView(),
         ]);
