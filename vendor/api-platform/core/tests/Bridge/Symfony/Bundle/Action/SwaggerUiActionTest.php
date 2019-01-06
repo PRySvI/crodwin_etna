@@ -71,7 +71,7 @@ class SwaggerUiActionTest extends TestCase
         $postRequest->setMethod('POST');
 
         $twigCollectionProphecy = $this->prophesize(\Twig_Environment::class);
-        $twigCollectionProphecy->render('@ApiPlatform/SwaggerUi/index.html.twig', [
+        $twigCollectionProphecy->render('@ApiPlatform/SwaggerUi/show_sources.html.twig', [
             'title' => '',
             'description' => '',
             'formats' => [],
@@ -98,7 +98,7 @@ class SwaggerUiActionTest extends TestCase
         ])->shouldBeCalled();
 
         $twigItemProphecy = $this->prophesize(\Twig_Environment::class);
-        $twigItemProphecy->render('@ApiPlatform/SwaggerUi/index.html.twig', [
+        $twigItemProphecy->render('@ApiPlatform/SwaggerUi/show_sources.html.twig', [
             'title' => '',
             'description' => '',
             'formats' => [],
@@ -144,7 +144,7 @@ class SwaggerUiActionTest extends TestCase
         $normalizerProphecy->normalize(Argument::type(Documentation::class), 'json', Argument::type('array'))->willReturn(self::SPEC)->shouldBeCalled();
 
         $twigProphecy = $this->prophesize(\Twig_Environment::class);
-        $twigProphecy->render('@ApiPlatform/SwaggerUi/index.html.twig', [
+        $twigProphecy->render('@ApiPlatform/SwaggerUi/show_sources.html.twig', [
             'title' => '',
             'description' => '',
             'formats' => [],

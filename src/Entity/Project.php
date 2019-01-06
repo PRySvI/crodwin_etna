@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
+ *
  */
 class Project
 {
@@ -21,10 +24,10 @@ class Project
      */
     private $name;
 
-    /**
+   /* /**
      * @ORM\Column(type="integer")
      */
-    private $user_id;
+    //private $user_id;
 
     /**
      * @ORM\Column(type="array")
@@ -46,10 +49,28 @@ class Project
      */
     private $public_visible;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+
+    /*
+     * @ORM\Column(type="string", length=255)
      */
-    private $file;
+   // private $file;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="projects")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Owner;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Source", mappedBy="project", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    private $sources;
+
+    public function __construct()
+    {
+        $this->sources = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -64,18 +85,6 @@ class Project
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getUserId(): ?int
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(int $user_id): self
-    {
-        $this->user_id = $user_id;
 
         return $this;
     }
@@ -137,15 +146,74 @@ class Project
         return $this;
     }
 
-    public function getFile(): ?string
+
+    public function getOwner(): ?User
+    {
+        return $this->Owner;
+    }
+
+    public function setOwner(?User $Owner): self
+    {
+        $this->Owner = $Owner;
+
+        return $this;
+    }
+
+
+   /* public function getFile(): ?string
     {
         return $this->file;
     }
 
-    public function setFile(?string $file): self
+    public function setFile(string $file): self
     {
         $this->file = $file;
+        return $this;
+    }
+*/
+    public function getSourcesNames()
+    {
+        if(is_null($this->sources))
+            return $this->sources;
+
+        $newSrcs = array();
+        foreach ($this->sources as $src)
+        {
+            $newSrcs[$src->getName()] = $src->getId();
+        }
+
+        return $newSrcs;
+    }
+
+    /**
+     * @return Collection|Source[]
+     */
+    public function getSources(): Collection
+    {
+        return $this->sources;
+    }
+
+    public function addSource(Source $source): self
+    {
+        if (!$this->sources->contains($source)) {
+            $this->sources[] = $source;
+            $source->setProject($this);
+        }
 
         return $this;
     }
+
+    public function removeSource(Source $source): self
+    {
+        if ($this->sources->contains($source)) {
+            $this->sources->removeElement($source);
+            // set the owning side to null (unless already changed)
+            if ($source->getProject() === $this) {
+                $source->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

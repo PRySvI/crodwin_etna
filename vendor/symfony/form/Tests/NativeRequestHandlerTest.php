@@ -98,7 +98,7 @@ class NativeRequestHandlerTest extends AbstractRequestHandlerTest
 
         $this->setRequestData('POST', array(), array('param1' => array(
             'name' => array(
-                'field' => 'uploads.txt',
+                'field' => 'upload.txt',
             ),
             'type' => array(
                 'field' => 'text/plain',
@@ -118,7 +118,7 @@ class NativeRequestHandlerTest extends AbstractRequestHandlerTest
             ->method('submit')
             ->with(array(
                 'field' => array(
-                    'name' => 'uploads.txt',
+                    'name' => 'upload.txt',
                     'type' => 'text/plain',
                     'tmp_name' => 'owfdskjasdfsa',
                     'error' => UPLOAD_ERR_OK,
@@ -135,7 +135,7 @@ class NativeRequestHandlerTest extends AbstractRequestHandlerTest
 
         $this->setRequestData('POST', array(), array('param1' => array(
             'name' => array(
-                'field' => array('subfield' => 'uploads.txt'),
+                'field' => array('subfield' => 'upload.txt'),
             ),
             'type' => array(
                 'field' => array('subfield' => 'text/plain'),
@@ -156,7 +156,7 @@ class NativeRequestHandlerTest extends AbstractRequestHandlerTest
             ->with(array(
                 'field' => array(
                     'subfield' => array(
-                        'name' => 'uploads.txt',
+                        'name' => 'upload.txt',
                         'type' => 'text/plain',
                         'tmp_name' => 'owfdskjasdfsa',
                         'error' => UPLOAD_ERR_OK,
@@ -209,7 +209,7 @@ class NativeRequestHandlerTest extends AbstractRequestHandlerTest
     protected function getMockFile($suffix = '')
     {
         return array(
-            'name' => 'uploads'.$suffix.'.txt',
+            'name' => 'upload'.$suffix.'.txt',
             'type' => 'text/plain',
             'tmp_name' => 'owfdskjasdfsa'.$suffix,
             'error' => UPLOAD_ERR_OK,
@@ -220,7 +220,7 @@ class NativeRequestHandlerTest extends AbstractRequestHandlerTest
     protected function getInvalidFile()
     {
         return array(
-            'name' => 'uploads.txt',
+            'name' => 'upload.txt',
             'type' => 'text/plain',
             'tmp_name' => 'owfdskjasdfsa',
             'error' => '0',

@@ -608,7 +608,7 @@ class CompoundFormTest extends AbstractFormTest
         $files = array(
             'author' => array(
                 'error' => array('image' => UPLOAD_ERR_OK),
-                'name' => array('image' => 'uploads.png'),
+                'name' => array('image' => 'upload.png'),
                 'size' => array('image' => null),
                 'tmp_name' => array('image' => $path),
                 'type' => array('image' => 'image/png'),
@@ -630,7 +630,7 @@ class CompoundFormTest extends AbstractFormTest
 
         $form->handleRequest($request);
 
-        $file = new UploadedFile($path, 'uploads.png', 'image/png', UPLOAD_ERR_OK);
+        $file = new UploadedFile($path, 'upload.png', 'image/png', UPLOAD_ERR_OK);
 
         $this->assertEquals('Bernhard', $form['name']->getData());
         $this->assertEquals($file, $form['image']->getData());
@@ -655,7 +655,7 @@ class CompoundFormTest extends AbstractFormTest
         $files = array(
             'image' => array(
                 'error' => UPLOAD_ERR_OK,
-                'name' => 'uploads.png',
+                'name' => 'upload.png',
                 'size' => null,
                 'tmp_name' => $path,
                 'type' => 'image/png',
@@ -677,7 +677,7 @@ class CompoundFormTest extends AbstractFormTest
 
         $form->handleRequest($request);
 
-        $file = new UploadedFile($path, 'uploads.png', 'image/png', UPLOAD_ERR_OK);
+        $file = new UploadedFile($path, 'upload.png', 'image/png', UPLOAD_ERR_OK);
 
         $this->assertEquals('Bernhard', $form['name']->getData());
         $this->assertEquals($file, $form['image']->getData());
@@ -698,7 +698,7 @@ class CompoundFormTest extends AbstractFormTest
         $files = array(
             'image' => array(
                 'error' => UPLOAD_ERR_OK,
-                'name' => 'uploads.png',
+                'name' => 'upload.png',
                 'size' => null,
                 'tmp_name' => $path,
                 'type' => 'image/png',
@@ -709,14 +709,14 @@ class CompoundFormTest extends AbstractFormTest
             'REQUEST_METHOD' => $method,
         ));
 
-        $form = $this->getBuilder('image')
+        $form = $this->getBuilder('image', null, null, array('allow_file_upload' => true))
             ->setMethod($method)
             ->setRequestHandler(new HttpFoundationRequestHandler())
             ->getForm();
 
         $form->handleRequest($request);
 
-        $file = new UploadedFile($path, 'uploads.png', 'image/png', UPLOAD_ERR_OK);
+        $file = new UploadedFile($path, 'upload.png', 'image/png', UPLOAD_ERR_OK);
 
         $this->assertEquals($file, $form->getData());
 
@@ -1079,6 +1079,21 @@ class CompoundFormTest extends AbstractFormTest
         $this->assertTrue($submit->isDisabled());
         $this->assertFalse($submit->isClicked());
         $this->assertFalse($submit->isSubmitted());
+    }
+
+    public function testFileUpload()
+    {
+        $reqHandler = new HttpFoundationRequestHandler();
+        $this->form->add($this->getBuilder('foo')->setRequestHandler($reqHandler)->getForm());
+        $this->form->add($this->getBuilder('bar')->setRequestHandler($reqHandler)->getForm());
+
+        $this->form->submit(array(
+            'foo' => 'Foo',
+            'bar' => new UploadedFile(__FILE__, 'upload.png', 'image/png', UPLOAD_ERR_OK),
+        ));
+
+        $this->assertSame('Submitted data was expected to be text or number, file upload given.', $this->form->get('bar')->getTransformationFailure()->getMessage());
+        $this->assertNull($this->form->get('bar')->getData());
     }
 
     protected function createForm()
