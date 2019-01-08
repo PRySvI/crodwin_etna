@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <link rel="stylesheet" href="{{ asset('css/multiple-select.css') }}" />
+    <link rel="stylesheet" href="templates/account.css">
+{% endblock %}
+{% block body %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    <form name="sub_form">
+        <div >
+            <div class="form-group">
+                <label> Choissisez une ou plusieurs langues</label>
+                <select id="ms" name="languages" multiple="multiple">
+                    {% for code , fullname in languages %}
+                        <option value="{{ code }}">{{ fullname }}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="form-group btn btn-outline-primary">Valider </button>
+    </form>
+
+
+    {% block javascripts %}
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/multiple-select.js') }}"></script>
+        <script>
+            $(function() {
+                $('#ms').change(function() {
+                    console.log($(this).val());
+                }).multipleSelect({
+                    width: '100%'
+                });
+            });
+            // Permet d'afficher le nom du fichier uploadé (bug bootstrap)
+            $(document).on('change', '.custom-file-input', function () {
+                let fileName = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+                $(this).parent('.custom-file').find('.custom-file-label').text(fileName);
+            });
+        </script>
+    {% endblock %}
+
+{% endblock %}

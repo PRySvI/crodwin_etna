@@ -67,8 +67,7 @@ class AccountController extends AbstractController
 
         dump($oldpass);
         dump($newpass);
-        if(!is_null($oldpass) && !is_null($newpass))
-        {
+        if (!is_null($oldpass) && !is_null($newpass)) {
             $hash = $encoder->encodePassword($user, $oldpass);
             $hash2 = $encoder->encodePassword($user, $newpass);
 
@@ -77,7 +76,7 @@ class AccountController extends AbstractController
 
             $okay = 'OKAY CHNAGED!!!!';
 
-            if($encoder->isPasswordValid($user, $oldpass)) {
+            if ($encoder->isPasswordValid($user, $oldpass)) {
                 $user->setPassword($hash2);
                 $manager->persist($user);
                 $manager->flush();
@@ -89,26 +88,46 @@ class AccountController extends AbstractController
 
         return $this->render('account/change_password.html.twig');
     }
-}
-/*
-    public function edit_password(Request $request) $2y$13$oe3/jlD16pfWTtU0DgNzVOxAjW12xrwkZiBPkzPoEOPr0/ftetose
+
+    /**
+     * @Route("/add_language", name="add_language")
+     */
+    public function add_language(Request $request, ObjectManager $manager)
     {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->find($email);
+        /** @var User $user */
+        $user = $this->getUser();
+       // $langsList = $request->get("languages");
+
 
         $form = $this->createFormBuilder($user)
-            ->add('email')
-            ->add('save', SubmitType::class, array('label'=> 'Modifier votre email'))
+            ->add('language', ChoiceType::class, array(
+                'choices' => array_count_values(Language::getAllLocales()),
+            ))
+            ->add('save_language', SubmitType::class, array('label' => 'Ajouter une langue'))
             ->getForm();
+        $form -> handleRequest($request);
 
-        $form->handleRequest($request);
-        $manager->persist($user);
-        $manager->flush();
+        if($form->isSubmitted()) {
+            $langsList = $request->get("languages");
 
-        return $this->render('account/account.html.twig', [
+            foreach ($langsList as $key => $value) {
+                $user->addLanguage($value);
+            };
+
+            $user->addLanguage($langsList);
+            $manager->persist($user);
+            $manager->flush();
+        }
+
+
+
+        dump($user);
+
+
+        return $this->render('account/add_language.html.twig', [
+            'languages' => Language::getAllLocales(),
             'form' => $form->createView()
         ]);
     }
-
-**/
+}
 
