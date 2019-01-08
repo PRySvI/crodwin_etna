@@ -39,23 +39,6 @@ class ProjectController extends AbstractController
         if($form->isSubmitted())
         {
             $project=$form->getData();
-            #$project->setDefaultLang($request->get("default_lang"));
-            //Partie de chargement du fichier
-
-           // /** @var UploadedFile $file */
-           // $file = $form->get('file')->getData();
-            //$file=$project->getFile();
-            //$fileName = $file->getClientOriginalName().'.'.$this->generateUniqueFileName().'.'.$file->guessExtension();
-            /*$file->move(
-                $this->getParameter('files_directory'),
-                $fileName
-            );
-
-            $src = new Source();
-            $src->setFile($fileName);
-
-            $project->addSource($src);
-            $src->setProject($project);*/
             $project->setOwner($user);
             $langsList = $request->get("choised_lang");
 

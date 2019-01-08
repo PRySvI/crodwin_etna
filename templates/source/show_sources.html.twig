@@ -27,10 +27,11 @@
     </nav>
     <br>
     <h3>Translations</h3>
+    <form name="sub_form" method="post">
         {% for key , value  in sources %}
-            <button value="sumbit">{{ key }}</button><br>
+            <button value="{{ key }}" type="submit" name="choised_src"> {{ key }}</button>
         {% endfor %}
-
+    </form>
 {% endblock %}
 
 {% block title %}

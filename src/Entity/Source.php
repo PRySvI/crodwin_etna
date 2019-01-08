@@ -59,8 +59,6 @@ class Source
 
     public function setFile(string $file): self
     {
-        /*$this->setName($file);
-        $this->readStringsFromFile($file);*/
         $this->file = $file;
         return $this;
     }

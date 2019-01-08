@@ -32,15 +32,6 @@ class ProjectType extends AbstractType
                 'preferred_choices' => array('French (France)'),
                 'label'    => 'Source Language'
                 ))
-            /*->add('languages', ChoiceType::class, [
-                'choices'  => array_count_values(Language::getAllLocales()),
-                'multiple'  => true,
-                'attr' => ['class' => '.ms-choice.disabled'],
-            ])*/
-
-            /*->add('file', FileType::class, array(
-                'label' => 'Your file to translate'
-            ))*/
             ->add('submit', SubmitType::class, [
                 'label' => 'Create',
                 'attr' => ['class' => 'btn btn-default pull-right'],
