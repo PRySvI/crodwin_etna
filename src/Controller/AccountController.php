@@ -34,12 +34,6 @@ class AccountController extends AbstractController
             ->add('save_description', SubmitType::class, array('label' => 'Modifier votre description'))
             ->add('email')
             ->add('save_email', SubmitType::class, array('label' => 'Modifier votre e-mail'))
-            ->add('defaultLang', ChoiceType::class, array(
-                'choices' => array_count_values(Language::getAllLocales()),
-                'label' => 'Ajouter une langue',
-                'preferred_choices' => array('French (France)')
-            ))
-            ->add('save_language', SubmitType::class, array('label' => 'Ajouter une langue'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -53,7 +47,6 @@ class AccountController extends AbstractController
         ]);
 
     }
-
 
     /**
      * @Route("/change_password", name="change_password")
@@ -119,10 +112,7 @@ class AccountController extends AbstractController
             $manager->flush();
         }
 
-
-
         dump($user);
-
 
         return $this->render('account/add_language.html.twig', [
             'languages' => Language::getAllLocales(),
