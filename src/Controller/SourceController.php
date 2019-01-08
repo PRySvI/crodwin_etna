@@ -11,21 +11,23 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class SourceController extends AbstractController
 {
     /**
      * @Route("/sources", name="show_sources")
      */
-    public function showSources(Request $request)
+    public function showSourcesList(Request $request)
     {
         $user = $this->getUser();
         $choised_lang = $request->get('choised_lang');
         $project_id = $request->get('project_id');
+        $choised_src = $request->get('choised_src');
         $project = $user->getProjectById($project_id);
         $src =$project->getSourcesNames();
-        dump($src);
-
+        if(!is_null($choised_src))
+        {
+            return $this->redirectToRoute('modify_source_strings',['project_id'=>$project->getId(), 'choised_src'=>$choised_src ]);
+        }
         if(count($src)==0)
         {
             return $this->redirectToRoute('create_source',['project_id'=>$project->getId()]);
@@ -50,20 +52,9 @@ class SourceController extends AbstractController
             ->getForm();
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
             /** @var UploadedFile $file */
             $file = $form->get('file')->getData();
-
-            /*dump($file);
-            dump($file->getClientOriginalName());
-            dump($file->getClientOriginalExtension());
-            dump($file->guessExtension());
-
-            dump($fileName);*/
-
             $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
 
             $file->move(
@@ -74,14 +65,10 @@ class SourceController extends AbstractController
             $source->setName($file->getClientOriginalName());
             $source->setProject($project);
             $source->readStringsFromFile();
-            dump($source);
            $menager->persist($source);
            $menager->flush();
            return $this->redirectToRoute('show_sources',['project_id'=>$project->getId(),'choised_lang'=>$request->get('choised_lang')]);
         }
-
-
-
 
         return $this->render('source/sourceUpload.html.twig', array(
             'controller_name' => 'SourceController',
@@ -89,6 +76,23 @@ class SourceController extends AbstractController
             'formP'=>$form->createView(),
         ));
 
+    }
+
+    /**
+     * @Route("/modify_source_strings" ,name="modify_source_strings")
+     */
+
+    public function modifySources(Request $request, ObjectManager $menager)
+    {
+        $project_id = $request->get('project_id');
+        $choised_src = $request->get('choised_src');
+        $project = $this->getUser()->getProjectById($project_id);
+        $srcStrings =$project->getSourceByName($choised_src)->getStrings();
+        dump($choised_src);
+        return $this->render('source/modify_source_strings.html.twig', [
+            'controller_name' => 'SourceController',
+            'strings'=>$srcStrings
+        ]);
     }
 
     /**

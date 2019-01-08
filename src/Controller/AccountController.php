@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ChangePassword;
+use App\Entity\User;
 use App\Form\ChangePasswordType;
 use Doctrine\Common\Persistence\ObjectManager;
 use http\Env\Response;
@@ -12,6 +13,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use App\Entity\Language;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -58,38 +60,38 @@ class AccountController extends AbstractController
      */
     public function changePasswordAction(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager)
     {
-        $change_pass = new ChangePassword();
+        /** @var User $user */
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(ChangePasswordType::class,$change_pass);
+        $newpass = $request->get('newpass');
+        $oldpass = $request->get('oldpass');
 
-        $form->handleRequest($request);
+        dump($oldpass);
+        dump($newpass);
+        if(!is_null($oldpass) && !is_null($newpass))
+        {
+            $hash = $encoder->encodePassword($user, $oldpass);
+            $hash2 = $encoder->encodePassword($user, $newpass);
 
-        //check si pas anonyme
-        if ($user!=null) {
-            //recupère l'id de l'user
-            $change_pass->setUserId($user->getId());
-            //associe OldPassword au password actuel
-            $change_pass->setOldPassword($user->getPassword());
+            dump($user->getPassword());
+            dump($hash);
 
-            //defini un nouveau mdp (il doit être encodé, là il ne l'est pas)
-            $newEncodedPassword = $encoder->encodePassword($user, $change_pass->getNewPassword());
-            $user->setPassword($newEncodedPassword);
-            $em->persist($user);
-            $em->flush();
+            $okay = 'OKAY CHNAGED!!!!';
+
+            if($encoder->isPasswordValid($user, $oldpass)) {
+                $user->setPassword($hash2);
+                $manager->persist($user);
+                $manager->flush();
+                dump($okay);
+            }
+
+            //return $this->redirectToRoute('account');
         }
 
-        if ($change_pass->getOldPassword() != $user->getPassword()) {
-            $form->addError(new FormError('Ancien mot de passe incorrect'));
-        }
-       // dump($change_pass);
-        return $this->render('account/change_password.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->render('account/change_password.html.twig');
     }
 }
 /*
-    public function edit_password(Request $request)
+    public function edit_password(Request $request) $2y$13$oe3/jlD16pfWTtU0DgNzVOxAjW12xrwkZiBPkzPoEOPr0/ftetose
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($email);

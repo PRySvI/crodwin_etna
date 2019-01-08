@@ -1,0 +1,27 @@
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/mss.css') }}" />
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+
+    <ul>
+        {% for key , value  in strings %}
+            <li><a href="#" type="submit">{{ value }}</a></li>
+        {% endfor %}
+        <li><a class="active" href="#home">Home</a></li>
+    </ul>
+
+    <div style="margin-left:25%;padding:1px 16px;height:1000px;">
+
+        <p>Some text..</p>
+        <div class="transl-text"></div>
+        <div class="auto-transl-text"></div>
+        <button type="submit">Save</button>
+    </div>
+{% endblock %}
+

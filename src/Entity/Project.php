@@ -160,17 +160,6 @@ class Project
     }
 
 
-   /* public function getFile(): ?string
-    {
-        return $this->file;
-    }
-
-    public function setFile(string $file): self
-    {
-        $this->file = $file;
-        return $this;
-    }
-*/
     public function getSourcesNames()
     {
         if(is_null($this->sources))
@@ -192,6 +181,23 @@ class Project
     {
         return $this->sources;
     }
+
+    public function getSourceByName($name)
+    {
+        if(is_null($this->sources))
+            return null;
+
+        foreach ($this->sources as $src)
+        {
+            if($src->getName()===$name){
+                return $src;
+            }
+
+        }
+
+        return null;
+    }
+
 
     public function addSource(Source $source): self
     {
