@@ -2,7 +2,7 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/multiple-select.css') }}" />
-    <link rel="stylesheet" href="templates/account.css">
+    <link rel="stylesheet" href="{{ asset('flags/flags.min.css') }}" />
 {% endblock %}
 
 {% block body %}
@@ -11,7 +11,7 @@
 
         <h1>Mon profil</h1>
 
-        <div class="picture"{{ form_start(form) }} </div>
+        <div class="picture"{{ form_start(form) }} >
         <img src="http://via.placeholder.com/150">
         <p> Importer une photo de profil (In coming...) </p>
 
@@ -20,14 +20,31 @@
             Cliquez ici pour ajouter des langues</a> </p>
         {% if app.user.defaultLang > 2 %}
             Vous avez le statut de traducteur pour les langues suivantes :
-            {% for defaultLang in app.user.defaultLang %}
-                <li>{{ defaultLang }}</li>
-            {% endfor %}
+            <form name="sub_form">
+                <table>
+                    <tbody>
+                    <tr>
+                        {% for key , value in ico_array %}
+                            <td> <button value="{{ value[0] }}" name="defaultLang"> <img src="{{ asset('flags/blank.gif') }}" class="flag flag-{{key}}" alt="{{ value[1] }}" /><br>{{ value[1] }} </button> </td>
+                        {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+            <br/>
         {% else %}
             <p> Vous n'avez pas le statut de traducteur, car vous n'avez pas sélectionné au moins deux langues </p>
-            {% for defaultLang in app.user.defaultLang %}
-                <li>{{ defaultLang }}</li>
-            {% endfor %}
+            <form name="sub_form">
+                <table>
+                    <tbody>
+                    <tr>
+                        {% for key , value in ico_array %}
+                            <td> <button value="{{ value[0] }}" name="defaultLang"> <img src="{{ asset('flags/blank.gif') }}" class="flag flag-{{key}}" alt="{{ value[1] }}" /><br>{{ value[1] }} </button> </td>
+                        {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
         {% endif %}
 
         <div class="description">
