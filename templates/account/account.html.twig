@@ -4,19 +4,28 @@
     <link rel="stylesheet" href="{{ asset('css/multiple-select.css') }}" />
     <link rel="stylesheet" href="templates/account.css">
 {% endblock %}
+
 {% block body %}
+
     {{ form_start(form) }}
-    <div id="conteneur">
+
         <h1>Mon profil</h1>
+
         <div class="picture"{{ form_start(form) }} </div>
         <img src="http://via.placeholder.com/150">
         <p> Importer une photo de profil (In coming...) </p>
 
         <h3> Mes langues </h3>
         {% if not app.user.defaultLang %}
-        <p> Vous n'avez pas encore sélectionner vos langues. <br/> Veuillez modifier vos informations </p>
+            <p> Vous n'avez pas encore sélectionner vos langues. <br/>
+                Veuillez modifier vos informations <br/>
+                {% for defaultLang in app.user.defaultLang %}
+                    <li>{{ defaultLang }}</li>
+                {% endfor %}
         {% else %}
-        <p> {{ app.user.defaultLang }}</p>
+            {% for defaultLang in app.user.defaultLang %}
+                <li>{{ defaultLang }}</li>
+            {% endfor %}
         {% endif %}
 
         <div class="description">
@@ -29,17 +38,21 @@
         </div>
 
         <h4>Modifier mes informations</h4>
-        <label for="username">Modifier votre e-mail actuel [{{ app.user.email }}] :</label>
-        {{ form_row(form.email) }}
+
+        {{ form_row(form.email , {'label': 'Modifier votre e-mail actuel :' }) }}
         {{ form_row(form.save_email) }}
 
-        <label for=password>Modifier votre mot de passe :</label>
-        <a class="nav-link" href="{{ path('change_password') }}">Cliquez ici pour changer votre mot de passe</a>
+        <p> <a class="btn btn-primary" href="{{ path('change_password') }}">
+                Cliquez ici pour changer votre mot de passe</a> </p>
+
+
+            {{ form_row(form.description , {'label': 'Modifier votre description :' }) }}
+            {{ form_row(form.save_description) }}
 
         <form name="sub_form">
             <div >
                 <div class="form-group">
-                    <label> Translate to Language</label>
+                    <label> Choissisez une ou plusieurs langues</label>
                     <select id="ms" name="choised_lang[]" multiple="multiple">
                         {% for code , fullname in languages %}
                             <option value="{{ code }}">{{ fullname }}</option>
@@ -48,30 +61,29 @@
                     </select>
                 </div>
             </div>
+            <button type="submit" class="form-group btn btn-outline-primary">Valider </button>
         </form>
 
-    <label for="description">Modifier votre description :</label>
-        {{ form_row(form.description) }}
-        {{ form_row(form.save_description) }}
-
-        {{ form_row(form.defaultLang) }}
-        {{ form_row(form.save_language) }}
-
-    <form name="sub_form">
-        <div >
-            <div class="form-group">
-                <label> Choissisez une ou plusieurs langues</label>
-                <select id="ms" name="choised_lang[]" multiple="multiple">
-                    {% for code , fullname in languages %}
-                        <option value="{{ code }}">{{ fullname }}</option>
-                    {% endfor %}
-
-                </select>
-            </div>
-        </div>
-    </form>
-    <button type="submit" class="form-group btn btn-outline-primary">Valider </button>
-
     {{ form_end(form) }}
+
+    {% block javascripts %}
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/multiple-select.js') }}"></script>
+        <script>
+            $(function() {
+                $('#ms').change(function() {
+                    console.log($(this).val());
+                }).multipleSelect({
+                    width: '100%'
+                });
+            });
+            // Permet d'afficher le nom du fichier uploadé (bug bootstrap)
+            $(document).on('change', '.custom-file-input', function () {
+                let fileName = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+                $(this).parent('.custom-file').find('.custom-file-label').text(fileName);
+            });
+        </script>
+
+    {% endblock %}
 
 {% endblock %}
