@@ -32,12 +32,6 @@ class AccountController extends AbstractController
             ->add('save_description', SubmitType::class, array('label' => 'Modifier votre description'))
             ->add('email')
             ->add('save_email', SubmitType::class, array('label' => 'Modifier votre e-mail'))
-            ->add('defaultLang', ChoiceType::class, array(
-                'choices' => array_count_values(Language::getAllLocales()),
-                'label' => 'Ajouter une langue',
-                'preferred_choices' => array('French (France)')
-            ))
-            ->add('save_language', SubmitType::class, array('label' => 'Ajouter une langue'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -80,6 +74,8 @@ class AccountController extends AbstractController
                 $user->setPassword($hash2);
                 $manager->persist($user);
                 $manager->flush();
+
+
                 dump($okay);
                 $this->addFlash(
                     'notice',
@@ -95,4 +91,28 @@ class AccountController extends AbstractController
         }
         return $this->render('account/change_password.html.twig');
     }
+
+    /**
+     * @Route("/add_language", name="add_language")
+     */
+    public function add_language(Request $request, ObjectManager $manager)
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        dump($user);
+            $langsList = $request->get("choised_lang");
+        if (isset($langsList)) {
+            foreach ($langsList as $key => $value) {
+                $user->addLanguage($value);
+            };
+            $manager->persist($user);
+            $manager->flush();
+        }
+
+        return $this->render('account/add_language.html.twig', [
+            'languages' => Language::getAllLocales(),
+        ]);
+    }
 }
+

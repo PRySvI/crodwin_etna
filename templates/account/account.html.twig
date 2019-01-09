@@ -16,13 +16,15 @@
         <p> Importer une photo de profil (In coming...) </p>
 
         <h3> Mes langues </h3>
-        {% if not app.user.defaultLang %}
-            <p> Vous n'avez pas encore sélectionner vos langues. <br/>
-                Veuillez modifier vos informations <br/>
-                {% for defaultLang in app.user.defaultLang %}
-                    <li>{{ defaultLang }}</li>
-                {% endfor %}
+    <p> <a class="btn btn-primary" href="{{ path('add_language') }}">
+            Cliquez ici pour ajouter des langues</a> </p>
+        {% if app.user.defaultLang > 2 %}
+            Vous avez le statut de traducteur pour les langues suivantes :
+            {% for defaultLang in app.user.defaultLang %}
+                <li>{{ defaultLang }}</li>
+            {% endfor %}
         {% else %}
+            <p> Vous n'avez pas le statut de traducteur, car vous n'avez pas sélectionné au moins deux langues </p>
             {% for defaultLang in app.user.defaultLang %}
                 <li>{{ defaultLang }}</li>
             {% endfor %}
@@ -48,41 +50,6 @@
             {{ form_row(form.description , {'label': 'Modifier votre description :' }) }}
             {{ form_row(form.save_description) }}
 
-        <form name="sub_form">
-            <div >
-                <div class="form-group">
-                    <label> Choissisez une ou plusieurs langues</label>
-                    <select id="ms" name="choised_lang[]" multiple="multiple">
-                        {% for code , fullname in languages %}
-                            <option value="{{ code }}">{{ fullname }}</option>
-                        {% endfor %}
-
-                    </select>
-                </div>
-            </div>
-            <button type="submit" class="form-group btn btn-outline-primary">Valider </button>
-        </form>
-
     {{ form_end(form) }}
-
-    {% block javascripts %}
-        <script src="{{ asset('js/jquery.min.js') }}"></script>
-        <script src="{{ asset('js/multiple-select.js') }}"></script>
-        <script>
-            $(function() {
-                $('#ms').change(function() {
-                    console.log($(this).val());
-                }).multipleSelect({
-                    width: '100%'
-                });
-            });
-            // Permet d'afficher le nom du fichier uploadé (bug bootstrap)
-            $(document).on('change', '.custom-file-input', function () {
-                let fileName = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
-                $(this).parent('.custom-file').find('.custom-file-label').text(fileName);
-            });
-        </script>
-
-    {% endblock %}
 
 {% endblock %}
