@@ -1,71 +1,61 @@
 {% extends 'base.html.twig' %}
+{% form_theme formP 'bootstrap_4_layout.html.twig' %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/multiple-select.css') }}" />
 {% endblock %}
 
 {% block body %}
-    {% form_theme formP 'bootstrap_4_layout.html.twig' %}
     {{ form_start(formP) }}
-    {{ form_errors(formP) }}
+        {{ form_errors(formP) }}
 
-<div class="container">
-    <div>
-        <p>Project name:</p>
-        {{ form_errors(formP.name) }}
-        {{ form_widget(formP.name) }}
-    </div>
+        <div class="container">
+            <div>
+                <p>Project name:</p>
+                {{ form_errors(formP.name) }}
+                {{ form_widget(formP.name) }}
+            </div>
 
-    <div>
-        <p>Project address:</p>
-        {{ form_errors(formP.url) }}
-        {{ form_widget(formP.url) }}
-    </div>
+            <div>
+                <p>Project address:</p>
+                {{ form_errors(formP.url) }}
+                {{ form_widget(formP.url) }}
+            </div>
+            <br>
+            <div>
+                {{ form_label(formP.publicVisible) }}
+                {{ form_errors(formP.publicVisible) }}
+                {{ form_widget(formP.publicVisible) }}
+                {{ form_help(formP.publicVisible) }}
+            </div>
+            <br>
+            <div>
+                <p>Source language:</p>
+                {{ form_widget(formP.defaultLang) }}
+                {{ form_help(formP.defaultLang) }}
+            </div>
+            <br>
 
-    <br>
-    <div>
-        {{ form_label(formP.publicVisible) }}
-        {{ form_errors(formP.publicVisible) }}
-        {{ form_widget(formP.publicVisible) }}
-        {{ form_help(formP.publicVisible) }}
-    </div>
-    <br>
-    <div>
-        <p>Source language:</p>
-        {{ form_widget(formP.defaultLang) }}
-        {{ form_help(formP.defaultLang) }}
-    </div>
-    <br>
+            <form name="sub_form">
+                <div >
+                    <div class="form-group">
+                        <label>Target languages:</label>
+                        <select id="ms" name="choised_lang[]" multiple="multiple">
+                            {% for code , fullname in languages %}
+                                <option value="{{ code }}">{{ fullname }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </form>
 
-
-
-     {#<div>
-         {{ form_label(formP.languages) }}
-         {{ form_errors(formP.languages) }}
-         {{ form_widget(formP.languages) }}
-         {{ form_help(formP.languages) }}
-     </div>#}
-
-    <form name="sub_form">
-    <div >
-        <div class="form-group">
-            <label>Target languages:</label>
-            <select id="ms" name="choised_lang[]" multiple="multiple">
-                {% for code , fullname in languages %}
-                    <option value="{{ code }}">{{ fullname }}</option>
-                {% endfor %}
-
-            </select>
+            <!--<button  type="submit" >OKAY</button>-->
+            <div>
+                {{ form_widget(formP.submit) }}
+            </div>
         </div>
-    </div>
-    </form>
 
-    <!--<button  type="submit" >OKAY</button>-->
-    <div>
-        {{ form_widget(formP.submit) }}
-    </div>
+    {{ form_end(formP) }}
 
-</div>
-{{ form_end(formP) }}
     {% block javascripts %}
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/multiple-select.js') }}"></script>
@@ -83,6 +73,7 @@
                 $(this).parent('.custom-file').find('.custom-file-label').text(fileName);
             });
         </script>
-        {% endblock %}
+    {% endblock %}
+
 {% endblock %}
 

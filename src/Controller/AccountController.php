@@ -2,18 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\ChangePassword;
 use App\Entity\User;
-use App\Form\ChangePasswordType;
 use Doctrine\Common\Persistence\ObjectManager;
-use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use App\Entity\Language;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -28,6 +23,9 @@ class AccountController extends AbstractController
     public function account_description(Request $request, ObjectManager $manager)
     {
         $user = $this->getUser();
+
+        if($user == null)
+            return $this->redirectToRoute('home');
 
         $form = $this->createFormBuilder($user)
             ->add('description')
@@ -51,7 +49,6 @@ class AccountController extends AbstractController
             'form' => $form->createView(),
             'languages' => Language::getAllLocales()
         ]);
-
     }
 
     /**
@@ -64,6 +61,9 @@ class AccountController extends AbstractController
         $newpass = $request->get('newpass');
         $oldpass = $request->get('oldpass');
 
+        if($user == null)
+            return $this->redirectToRoute('home');
+
         dump($oldpass);
         dump($newpass);
         if(!is_null($oldpass) && !is_null($newpass))
@@ -74,30 +74,25 @@ class AccountController extends AbstractController
             dump($user->getPassword());
             dump($hash);
 
-            $okay = 'OKAY CHNAGED!!!!';
+            $okay = 'OKAY CHANGED!!!!';
 
             if($encoder->isPasswordValid($user, $oldpass)) {
                 $user->setPassword($hash2);
                 $manager->persist($user);
                 $manager->flush();
                 dump($okay);
-
                 $this->addFlash(
                     'notice',
                     'Votre mot de passe a bien été modifié !'
                 );
-
             } else {
                 $this->addFlash(
                     'notice',
                     'Votre ancien mot de passe est incorrect !'
                 );
             }
-
             //return $this->redirectToRoute('account');
         }
-
         return $this->render('account/change_password.html.twig');
     }
 }
-
