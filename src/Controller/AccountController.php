@@ -54,7 +54,6 @@ class AccountController extends AbstractController
 
     }
 
-
     /**
      * @Route("/change_password", name="change_password")
      */
@@ -82,6 +81,17 @@ class AccountController extends AbstractController
                 $manager->persist($user);
                 $manager->flush();
                 dump($okay);
+
+                $this->addFlash(
+                    'notice',
+                    'Votre mot de passe a bien été modifié !'
+                );
+
+            } else {
+                $this->addFlash(
+                    'notice',
+                    'Votre ancien mot de passe est incorrect !'
+                );
             }
 
             //return $this->redirectToRoute('account');
@@ -90,25 +100,4 @@ class AccountController extends AbstractController
         return $this->render('account/change_password.html.twig');
     }
 }
-/*
-    public function edit_password(Request $request) $2y$13$oe3/jlD16pfWTtU0DgNzVOxAjW12xrwkZiBPkzPoEOPr0/ftetose
-    {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->find($email);
-
-        $form = $this->createFormBuilder($user)
-            ->add('email')
-            ->add('save', SubmitType::class, array('label'=> 'Modifier votre email'))
-            ->getForm();
-
-        $form->handleRequest($request);
-        $manager->persist($user);
-        $manager->flush();
-
-        return $this->render('account/account.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
-
-**/
 
