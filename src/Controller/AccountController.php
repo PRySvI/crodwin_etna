@@ -24,7 +24,7 @@ class AccountController extends AbstractController
     {
         $user = $this->getUser();
 
-        if($user == null)
+        if ($user == null)
             return $this->redirectToRoute('home');
 
         $form = $this->createFormBuilder($user)
@@ -41,7 +41,8 @@ class AccountController extends AbstractController
 
         return $this->render('account/account.html.twig', [
             'form' => $form->createView(),
-            'languages' => Language::getAllLocales()
+            'languages' => Language::getAllLocales(),
+            'ico_array' => $this->renderIcons($user->getLanguage())
         ]);
     }
 
@@ -55,13 +56,12 @@ class AccountController extends AbstractController
         $newpass = $request->get('newpass');
         $oldpass = $request->get('oldpass');
 
-        if($user == null)
+        if ($user == null)
             return $this->redirectToRoute('home');
 
         dump($oldpass);
         dump($newpass);
-        if(!is_null($oldpass) && !is_null($newpass))
-        {
+        if (!is_null($oldpass) && !is_null($newpass)) {
             $hash = $encoder->encodePassword($user, $oldpass);
             $hash2 = $encoder->encodePassword($user, $newpass);
 
@@ -70,7 +70,7 @@ class AccountController extends AbstractController
 
             $okay = 'OKAY CHANGED!!!!';
 
-            if($encoder->isPasswordValid($user, $oldpass)) {
+            if ($encoder->isPasswordValid($user, $oldpass)) {
                 $user->setPassword($hash2);
                 $manager->persist($user);
                 $manager->flush();
@@ -101,7 +101,7 @@ class AccountController extends AbstractController
         $user = $this->getUser();
 
         dump($user);
-            $langsList = $request->get("choised_lang");
+        $langsList = $request->get("choised_lang");
         if (isset($langsList)) {
             foreach ($langsList as $key => $value) {
                 $user->addLanguage($value);
@@ -111,8 +111,23 @@ class AccountController extends AbstractController
         }
 
         return $this->render('account/add_language.html.twig', [
-            'languages' => Language::getAllLocales(),
+            'languages' => Language::getAllLocales()
         ]);
     }
+
+    public function renderIcons($ico_langs)
+    {
+        $adaptedArray = array();
+        foreach ($ico_langs as $lang)
+        {
+            $index = strtolower(substr($lang,strlen($lang)-2,strlen($lang)));
+            $fullname = Language::getValueByKey($lang);
+            $adaptedArray[$index] = array($lang , $fullname);
+        }
+        return $adaptedArray;
+    }
+
 }
+
+
 
