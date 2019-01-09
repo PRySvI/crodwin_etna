@@ -4,18 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Language;
 use App\Entity\Project;
-use App\Entity\Source;
-use App\Entity\User;
 use App\Form\ProjectType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ProjectController extends AbstractController
 {
@@ -29,11 +23,11 @@ class ProjectController extends AbstractController
     {
         $project = new Project();
         $user = $this->getUser();
+
         if($user == null)
-            return;
+            return $this->redirectToRoute('home');
 
         $form = $this->createForm(ProjectType::class,$project);
-
         $form -> handleRequest($request);
 
         if($form->isSubmitted())
@@ -69,7 +63,7 @@ class ProjectController extends AbstractController
     {
         $user = $this->getUser();
         if($user == null)
-            return null;
+            return $this->redirectToRoute('home');
 
         $project = $user->getProjectByName($slug);
 
@@ -82,7 +76,6 @@ class ProjectController extends AbstractController
             $choised_lang = $request->get("lang_src_list");
             return $this->redirectToRoute('show_sources',['project_id'=>$project->getId(),'choised_lang'=>$choised_lang]);
         }
-
 
         return $this->render('project/show_project.html.twig', [
             'controller_name' => 'ProjectController',

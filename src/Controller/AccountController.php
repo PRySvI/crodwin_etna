@@ -2,18 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\ChangePassword;
 use App\Entity\User;
-use App\Form\ChangePasswordType;
 use Doctrine\Common\Persistence\ObjectManager;
-use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use App\Entity\Language;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -29,17 +24,14 @@ class AccountController extends AbstractController
     {
         $user = $this->getUser();
 
+        if ($user == null)
+            return $this->redirectToRoute('home');
+
         $form = $this->createFormBuilder($user)
             ->add('description')
             ->add('save_description', SubmitType::class, array('label' => 'Modifier votre description'))
             ->add('email')
             ->add('save_email', SubmitType::class, array('label' => 'Modifier votre e-mail'))
-            ->add('defaultLang', ChoiceType::class, array(
-                'choices' => array_count_values(Language::getAllLocales()),
-                'label' => 'Ajouter une langue',
-                'preferred_choices' => array('French (France)')
-            ))
-            ->add('save_language', SubmitType::class, array('label' => 'Ajouter une langue'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -49,11 +41,10 @@ class AccountController extends AbstractController
 
         return $this->render('account/account.html.twig', [
             'form' => $form->createView(),
-            'languages' => Language::getAllLocales()
+            'languages' => Language::getAllLocales(),
+            'ico_array' => $this->renderIcons($user->getLanguage())
         ]);
-
     }
-
 
     /**
      * @Route("/change_password", name="change_password")
@@ -65,10 +56,12 @@ class AccountController extends AbstractController
         $newpass = $request->get('newpass');
         $oldpass = $request->get('oldpass');
 
+        if ($user == null)
+            return $this->redirectToRoute('home');
+
         dump($oldpass);
         dump($newpass);
-        if(!is_null($oldpass) && !is_null($newpass))
-        {
+        if (!is_null($oldpass) && !is_null($newpass)) {
             $hash = $encoder->encodePassword($user, $oldpass);
             $hash2 = $encoder->encodePassword($user, $newpass);
 
@@ -76,37 +69,61 @@ class AccountController extends AbstractController
             dump($hash);
 
 
-            if($encoder->isPasswordValid($user, $oldpass)) {
+            if ($encoder->isPasswordValid($user, $oldpass)) {
                 $user->setPassword($hash2);
                 $manager->persist($user);
                 $manager->flush();
+                $this->addFlash(
+                    'notice',
+                    'Votre mot de passe a bien été modifié !'
+                );
+            } else {
+                $this->addFlash(
+                    'notice',
+                    'Votre ancien mot de passe est incorrect !'
+                );
             }
-
             //return $this->redirectToRoute('account');
         }
-
         return $this->render('account/change_password.html.twig');
     }
-}
-/*
-    public function edit_password(Request $request) $2y$13$oe3/jlD16pfWTtU0DgNzVOxAjW12xrwkZiBPkzPoEOPr0/ftetose
+
+    /**
+     * @Route("/add_language", name="add_language")
+     */
+    public function add_language(Request $request, ObjectManager $manager)
     {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->find($email);
+        /** @var User $user */
+        $user = $this->getUser();
 
-        $form = $this->createFormBuilder($user)
-            ->add('email')
-            ->add('save', SubmitType::class, array('label'=> 'Modifier votre email'))
-            ->getForm();
+        dump($user);
+        $langsList = $request->get("choised_lang");
+        if (isset($langsList)) {
+            foreach ($langsList as $key => $value) {
+                $user->addLanguage($value);
+            };
+            $manager->persist($user);
+            $manager->flush();
+        }
 
-        $form->handleRequest($request);
-        $manager->persist($user);
-        $manager->flush();
-
-        return $this->render('account/account.html.twig', [
-            'form' => $form->createView()
+        return $this->render('account/add_language.html.twig', [
+            'languages' => Language::getAllLocales()
         ]);
     }
 
-**/
+    public function renderIcons($ico_langs)
+    {
+        $adaptedArray = array();
+        foreach ($ico_langs as $lang)
+        {
+            $index = strtolower(substr($lang,strlen($lang)-2,strlen($lang)));
+            $fullname = Language::getValueByKey($lang);
+            $adaptedArray[$index] = array($lang , $fullname);
+        }
+        return $adaptedArray;
+    }
+
+}
+
+
 
