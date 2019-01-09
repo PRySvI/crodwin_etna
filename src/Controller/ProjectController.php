@@ -45,7 +45,7 @@ class ProjectController extends AbstractController
             foreach ($langsList as $key=>$value)
             {
                 $project->addLanguage($value);
-            };
+            }
             //dump(Language::getValueByIndex($form->get('defaultLang')->getData()));
             $user->addProject($project);
             $menager->persist($project);

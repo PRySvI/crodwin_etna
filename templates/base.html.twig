@@ -29,10 +29,10 @@
                     {% if app.user and app.user.getProjects() != null %}
                     <div class="dropdown">
                         <li class="nav-item fa fa-caret-down ">
-                            <a class="nav-link" href="{{ path('project_create') }}">Mes projets</a>
+                            <a class="nav-link" href="#">Mes projets</a>
                             <div class="dropdown-content">
                                 {% for var in app.user.getProjects() %}
-                                    <a class="nav-link" href="">{{  var.getName() }}</a>
+                                    <a class="nav-link" href="/project/{{  var.getName() }}">{{  var.getName() }}</a>
                                 {% endfor %}
                             </div>
 
@@ -61,6 +61,8 @@
         <div class="container">
             {% block body %}{% endblock %}
         </div>
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+
+        {% endblock %}
     </body>
 </html>

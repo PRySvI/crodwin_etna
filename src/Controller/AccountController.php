@@ -75,13 +75,11 @@ class AccountController extends AbstractController
             dump($user->getPassword());
             dump($hash);
 
-            $okay = 'OKAY CHNAGED!!!!';
 
             if($encoder->isPasswordValid($user, $oldpass)) {
                 $user->setPassword($hash2);
                 $manager->persist($user);
                 $manager->flush();
-                dump($okay);
             }
 
             //return $this->redirectToRoute('account');

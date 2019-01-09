@@ -88,7 +88,6 @@ class SourceController extends AbstractController
         $choised_src = $request->get('choised_src');
         $project = $this->getUser()->getProjectById($project_id);
         $srcStrings =$project->getSourceByName($choised_src)->getStrings();
-        dump($choised_src);
         return $this->render('source/modify_source_strings.html.twig', [
             'controller_name' => 'SourceController',
             'strings'=>$srcStrings
