@@ -49,6 +49,10 @@ class Project
      */
     private $public_visible;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_blocked;
 
     /*
      * @ORM\Column(type="string", length=255)
@@ -70,6 +74,16 @@ class Project
     public function __construct()
     {
         $this->sources = new ArrayCollection();
+    }
+
+    public function isBlocked(): ?bool
+    {
+        return $this->id;
+    }
+
+    public function setBlocked($val) : ?bool
+    {
+        return $this->name;
     }
 
     public function getId(): ?int

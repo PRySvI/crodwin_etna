@@ -68,15 +68,11 @@ class AccountController extends AbstractController
             dump($user->getPassword());
             dump($hash);
 
-            $okay = 'OKAY CHANGED!!!!';
 
             if ($encoder->isPasswordValid($user, $oldpass)) {
                 $user->setPassword($hash2);
                 $manager->persist($user);
                 $manager->flush();
-
-
-                dump($okay);
                 $this->addFlash(
                     'notice',
                     'Votre mot de passe a bien été modifié !'

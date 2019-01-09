@@ -1,6 +1,6 @@
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/mss.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/modify_src.css') }}" />
 {% endblock %}
 
 {% block title %}
@@ -9,19 +9,49 @@
 
 {% block body %}
 
-    <ul>
-        {% for key , value  in strings %}
-            <li><a href="#" type="submit">{{ value }}</a></li>
-        {% endfor %}
-        <li><a class="active" href="#home">Home</a></li>
-    </ul>
-
-    <div style="margin-left:25%;padding:1px 16px;height:1000px;">
-
-        <p>Some text..</p>
-        <div class="transl-text"></div>
-        <div class="auto-transl-text"></div>
-        <button type="submit">Save</button>
+    <div class="topnav">
+        <a class="active" href="#home">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
     </div>
+
+    {% for key , value  in strings %}
+
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, '{{ key }}')">{{ key }}</button>
+        </div>
+
+        <div id="{{ key }}" class="tabcontent">
+            <br>
+            <label for="story">{{ value }}</label>
+            <br><br>
+
+            <textarea id="story" name="story" rows="5" cols="150">
+        </textarea>
+            <br>
+            <p >Google exemple</p>
+            <button >Save</button>
+        </div>
+    {% endfor %}
+
+    {% block javascript %}
+        <script src="{{ asset('js/modify_source.js') }}"></script>
+    {% endblock %}
 {% endblock %}
 
+   {# <div class="tab">
+        <button class="tablinks" onclick="openCity(event, '{{ key }}')">{{ key }}</button>
+    </div>
+
+    <div id="{{ key }}" class="tabcontent">
+        <br>
+        <label for="story">{{ value }}</label>
+        <br><br>
+
+        <textarea id="story" name="story" rows="5" cols="150">
+        </textarea>
+        <br>
+        <p >Google exemple</p>
+        <button >Save</button>
+    </div>#}
