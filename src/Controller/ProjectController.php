@@ -164,7 +164,4 @@ class ProjectController extends AbstractController
             'controller_name' => 'SecurityController',
         ]);
     }
-
-
-
 }

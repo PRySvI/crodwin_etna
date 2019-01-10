@@ -208,6 +208,11 @@ class User implements UserInterface
      */
     private $projects;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default":false})
+     */
+    private $translator = false;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
@@ -280,6 +285,18 @@ class User implements UserInterface
                 $project->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTranslator(): ?bool
+    {
+        return $this->translator;
+    }
+
+    public function setTranslator(bool $translator): self
+    {
+        $this->translator = $translator;
 
         return $this;
     }

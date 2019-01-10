@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projects{% endblock %}
+
+
+
+{% block body %}
+
+    <ul>
+    {%   for key , value in projects %}
+        <li>  <button value="{{ key }}" type="submit" name="choised_src"> {{ key }}</button></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
