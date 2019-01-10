@@ -165,7 +165,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getLanguage(): ?array
+    public function getAllLanguages(): ?array
     {
         return $this->language;
     }
@@ -207,6 +207,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="Owner", orphanRemoval=true)
      */
     private $projects;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":true})
+     */
+    private $translator;
 
     public function __construct()
     {
@@ -280,6 +285,18 @@ class User implements UserInterface
                 $project->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTranslator(): ?bool
+    {
+        return $this->translator;
+    }
+
+    public function setTranslator(bool $translator): self
+    {
+        $this->translator = $translator;
 
         return $this;
     }
