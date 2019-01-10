@@ -32,6 +32,7 @@ class ProjectController extends AbstractController
 
         if($form->isSubmitted())
         {
+            $project->setCreationDate(new \DateTime(null, new \DateTimeZone('Europe/Paris')));
             $project=$form->getData();
             $project->setOwner($user);
             $langsList = $request->get("choised_lang");
@@ -81,7 +82,8 @@ class ProjectController extends AbstractController
             'controller_name' => 'ProjectController',
             'project_name' =>$project->getName(),
             'languages'=>$project->getLanguages(),
-            'ico_array'=>$this->renderIcons($project->getLanguages())
+            'ico_array'=>$this->renderIcons($project->getLanguages()),
+            'sources'=>$project->getSources()
         ]);
     }
 
@@ -106,6 +108,54 @@ class ProjectController extends AbstractController
     }
 
     /**
+     * @Route("/project", name="show_all_projects_page")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAllProjectsPage(Request $request, ObjectManager $menager)
+    {
+        $user = $this->getUser();
+
+        if($user == null)
+            return $this->redirectToRoute('home');
+
+        $block = $request->get("block_btn");
+        $delete = $request->get("del_btn");
+
+        if(!is_null($block))
+        {
+            $project = $user->getProjectByName($block);
+            if($project->isBlocked())
+            {
+                $project->setBlocked(false);
+            }
+            else
+            {
+                $project->setBlocked(true);
+            }
+
+            $menager->persist($project);
+            $menager->flush();
+
+        }
+
+        if(!is_null($delete))
+        {
+
+            $project = $user->getProjectByName($delete);
+            $menager->remove($project);
+            $menager->flush();
+
+        }
+
+        return $this->render('project/show_project_page.html.twig', [
+            'controller_name' => 'ProjectController',
+            'projects'=>$user->getProjects()
+        ]);
+    }
+
+
+    /**
      * @Route("/done", name="done_page")
      */
     public function created()
@@ -114,4 +164,7 @@ class ProjectController extends AbstractController
             'controller_name' => 'SecurityController',
         ]);
     }
+
+
+
 }

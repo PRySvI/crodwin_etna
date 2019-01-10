@@ -116,7 +116,8 @@ class SourceController extends AbstractController
 
         return $this->render('source/modify_source_strings.html.twig', [
             'controller_name' => 'SourceController',
-            'strings'=>$srcStrings
+            'strings'=>$srcStrings,
+            'project_blocked'=>$project->isBlocked()
         ]);
     }
 

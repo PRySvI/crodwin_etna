@@ -135,6 +135,36 @@ class AccountController extends AbstractController
         return $adaptedArray;
     }
 
+
+    /**
+     * @Route("/profile", name="profile_page")
+     *
+     */
+    public function profilPage()
+    {
+        /**@var User $user**/
+        $user = $this->getUser();
+        $allSources=array();
+        $tRSources=array();
+        foreach ($user->getProjects() as $project)
+        {
+            foreach ($project->getSources() as $source)
+            {
+                array_push($allSources,$source->getStrings());
+                array_push($tRSources,$source->getTranslatedStrings());
+            }
+
+        }
+
+        return $this->render('account/profile.html.twig', [
+            'controller_name' => 'AccountController',
+            'prjtsCnt' => count($user->getProjects()),
+            'srcCnt' => count($allSources),
+            'srcTranslated' => count($tRSources),
+            'pCreationDate' => $project->getCreationDate()->format('Y-m-d')
+        ]);
+    }
+
 }
 
 

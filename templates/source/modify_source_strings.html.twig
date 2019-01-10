@@ -1,4 +1,4 @@
-
+{% extends 'base.html.twig' %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/modify_src.css') }}" />
 {% endblock %}
@@ -9,12 +9,7 @@
 
 {% block body %}
 
-    <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
-    </div>
+
 <form method="post" >
     <table>
     {% for key , value  in strings %}
@@ -28,7 +23,7 @@
         </tr>
     {% endfor %}
     </table>
-    <button type="submit">Save</button></td>
+    <button type="submit" {% if project_blocked==true %} disabled {% endif %}>Save</button></td>
 </form>
     {% block javascript %}
         <script src="{{ asset('js/modify_source.js') }}"></script>

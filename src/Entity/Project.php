@@ -71,6 +71,11 @@ class Project
      */
     private $sources;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $creationDate;
+
     public function __construct()
     {
         $this->sources = new ArrayCollection();
@@ -78,12 +83,12 @@ class Project
 
     public function isBlocked(): ?bool
     {
-        return $this->id;
+        return $this->is_blocked;
     }
 
     public function setBlocked($val) : ?bool
     {
-        return $this->name;
+        return $this->is_blocked=$val;
     }
 
     public function getId(): ?int
@@ -232,6 +237,18 @@ class Project
                 $source->setProject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreationDate(): ?\DateTimeInterface
+    {
+        return $this->creationDate;
+    }
+
+    public function setCreationDate(?\DateTimeInterface $creationDate): self
+    {
+        $this->creationDate = $creationDate;
 
         return $this;
     }

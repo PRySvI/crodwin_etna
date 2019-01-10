@@ -165,7 +165,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getLanguage(): ?array
+    public function getAllLanguages(): ?array
     {
         return $this->language;
     }

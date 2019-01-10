@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% for key , value in projects %}
+       <form METHOD="post">
+        <table>
+            <tr style="border-color: red">
+                <th>{{ value.getName() }}</th>
+                <td><button type="submit" value="{{ value.getName() }}" name="block_btn">Block/Unlblock</button></td>
+                <td><button type="submit" value="{{ value.getName() }}" name="del_btn">Delete</button></td>
+                <td><a href="{{ asset('/dashboard/{{ value.getName() }}') }}" >DashBoard</a></td>
+            </tr>
+
+       <br>
+        </table>
+       </form>
+    {% endfor %}
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
