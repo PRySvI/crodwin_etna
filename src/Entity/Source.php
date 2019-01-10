@@ -71,7 +71,7 @@ class Source
         {
             if(empty($line))
                 continue;
-            $line = str_replace(array("r","n"),"",$line);
+            $line = str_replace(array("\r","\n"),"",$line);
             $newline = explode( ";", $line );
             $this->strings[$newline[0]] = $newline[1];
         }
