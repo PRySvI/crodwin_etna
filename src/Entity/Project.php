@@ -52,7 +52,7 @@ class Project
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_blocked;
+    private $is_blocked = false;
 
     /*
      * @ORM\Column(type="string", length=255)

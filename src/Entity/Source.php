@@ -34,7 +34,7 @@ class Source
     /**
      * @ORM\Column(type="array", nullable=true)
      */
-    private $translated_strings = [];
+    private $translated_strings = array();
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="sources")
@@ -95,9 +95,26 @@ class Source
         return $this->translated_strings;
     }
 
-    public function setTranslatedStrings(?array $translated_strings): self
+    public function getTranslatedStringsByLang($lang): ?array
     {
-        $this->translated_strings = $translated_strings;
+        $strings = array();
+
+        foreach ($this->translated_strings as $key => $value)
+        {
+            foreach ($value as $key2 => $value2)
+            {
+                if($lang === $key2)
+                {
+                    $strings[$key][$key2] = $value2;
+                }
+            }
+        }
+        return $strings;
+    }
+
+    public function addTranslatedStrings($key, $key2,  $new_translated_string): self
+    {
+        $this->translated_strings[$key][$key2] =$new_translated_string;
 
         return $this;
     }
