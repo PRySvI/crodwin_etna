@@ -15,26 +15,21 @@
         <a href="#contact">Contact</a>
         <a href="#about">About</a>
     </div>
-
+<form method="post" >
+    <table>
     {% for key , value  in strings %}
 
-        <div class="tab">
-            <button class="tablinks" onclick="openCity(event, '{{ key }}')">{{ key }}</button>
-        </div>
+        <tr>
+            <td>{{ key }}</td>
+            <td><label for="{{ key }}">{{ value }}</label><br>
+                <input type="hidden" name="translated_keys[]" value="{{ key }}">
+                <textarea id="{{ key }}" name="translated_values[]" rows="5" cols="150"></textarea><br>
 
-        <div id="{{ key }}" class="tabcontent">
-            <br>
-            <label for="story">{{ value }}</label>
-            <br><br>
-
-            <textarea id="story" name="story" rows="5" cols="150">
-        </textarea>
-            <br>
-            <p >Google exemple</p>
-            <button >Save</button>
-        </div>
+        </tr>
     {% endfor %}
-
+    </table>
+    <button type="submit">Save</button></td>
+</form>
     {% block javascript %}
         <script src="{{ asset('js/modify_source.js') }}"></script>
     {% endblock %}

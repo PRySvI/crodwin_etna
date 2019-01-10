@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Source;
+use App\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -26,11 +27,11 @@ class SourceController extends AbstractController
         $src =$project->getSourcesNames();
         if(!is_null($choised_src))
         {
-            return $this->redirectToRoute('modify_source_strings',['project_id'=>$project->getId(), 'choised_src'=>$choised_src ]);
+            return $this->redirectToRoute('modify_source_strings',['project_id'=>$project->getId(), 'choised_src'=>$choised_src,'choised_lang'=>$choised_lang]);
         }
         if(count($src)==0)
         {
-            return $this->redirectToRoute('create_source',['project_id'=>$project->getId()]);
+            return $this->redirectToRoute('create_source',['project_id'=>$project->getId(),'choised_lang'=>$choised_lang]);
         }
         return $this->render('source/show_sources.html.twig', [
             'controller_name' => 'SourceController',
@@ -84,10 +85,35 @@ class SourceController extends AbstractController
 
     public function modifySources(Request $request, ObjectManager $menager)
     {
+        /**@var User $user */
+        $user = $this->getUser();
         $project_id = $request->get('project_id');
         $choised_src = $request->get('choised_src');
-        $project = $this->getUser()->getProjectById($project_id);
-        $srcStrings =$project->getSourceByName($choised_src)->getStrings();
+        $choised_lang = $request->get('choised_lang');
+        $translated_src_key = $request->get('translated_keys');
+        $translated_src = $request->get('translated_values');
+        $project = $user->getProjectById($project_id);
+        /** @var Source $source */
+        $source = $project->getSourceByName($choised_src);
+        $srcStrings =$source->getStrings();
+        $translatedStrings =$source->getTranslatedStringsByLang($choised_lang);
+
+        if(!is_null($translated_src))
+        {
+            for($i = 0 ; $i < count($translated_src); $i++)
+            {
+
+                if( strlen($translated_src[$i]) > 0)
+                {
+                    $source->addTranslatedStrings($translated_src_key[$i],$choised_lang , $translated_src[$i]);
+                }
+            }
+            dump($source);
+            $menager->persist($source);
+            $menager->flush();
+
+        }
+
         return $this->render('source/modify_source_strings.html.twig', [
             'controller_name' => 'SourceController',
             'strings'=>$srcStrings
