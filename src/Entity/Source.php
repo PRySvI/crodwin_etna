@@ -73,7 +73,8 @@ class Source
                 continue;
             $line = str_replace(array("\r","\n"),"",$line);
             $newline = explode( ";", $line );
-            $this->strings[$newline[0]] = $newline[1];
+           // mb_convert_encoding($newline[0],'UTF-8', 'ISO-8859-1');
+            $this->strings[mb_convert_encoding($newline[0],'UTF-8')] = mb_convert_encoding($newline[1],'UTF-8');
         }
 
     }
