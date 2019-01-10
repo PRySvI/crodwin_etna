@@ -42,7 +42,7 @@ class AccountController extends AbstractController
         return $this->render('account/account.html.twig', [
             'form' => $form->createView(),
             'languages' => Language::getAllLocales(),
-            'ico_array' => $this->renderIcons($user->getLanguage())
+            'ico_array' => $this->renderIcons($user->getAllLanguages())
         ]);
     }
 
@@ -105,6 +105,19 @@ class AccountController extends AbstractController
             $manager->persist($user);
             $manager->flush();
         }
+
+        $myLanguage = $user->getAllLanguages();
+
+        if (count($myLanguage) >= 2 ) {
+            $user->setTranslator(true);
+            $manager->persist($user);
+            $manager->flush();
+        } else {
+            $user->setTranslator(false);
+            $manager->persist($user);
+            $manager->flush();
+        }
+
 
         return $this->render('account/add_language.html.twig', [
             'languages' => Language::getAllLocales()
