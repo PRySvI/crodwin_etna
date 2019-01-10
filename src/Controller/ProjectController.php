@@ -114,4 +114,26 @@ class ProjectController extends AbstractController
             'controller_name' => 'SecurityController',
         ]);
     }
+    
+    /**
+     * @Route("/project", name="project_list")
+     */
+    public function ProjectList(Request $request, ObjectManager $menager)
+    {
+
+        $user = $this->getUser();
+        $projects = $user->getProjects();
+
+        $owner = $projects->getOwner($user);
+
+       // if ($owner === $user) {
+
+        //}
+
+
+        return $this->render('project/project_list.html.twig', [
+            'projects' =>$projects
+        ]);
+    }
+
 }

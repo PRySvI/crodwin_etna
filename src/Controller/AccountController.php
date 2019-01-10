@@ -37,7 +37,7 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
         $manager->persist($user);
         $manager->flush();
-
+        dump($user);
         return $this->render('account/account.html.twig', [
             'form' => $form->createView(),
             'languages' => Language::getAllLocales(),
