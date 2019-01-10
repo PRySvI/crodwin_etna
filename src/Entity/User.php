@@ -209,9 +209,9 @@ class User implements UserInterface
     private $projects;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":true})
+     * @ORM\Column(type="boolean", options={"default":false})
      */
-    private $translator;
+    private $translator = false;
 
     public function __construct()
     {
