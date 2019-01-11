@@ -2,20 +2,31 @@
 
 {% block body %}
 
-    {% for key , value in projects %}
-       <form METHOD="post">
-        <table>
-            <tr style="border-color: red">
-                <th>{{ value.getName() }}</th>
-                <td><button type="submit" value="{{ value.getName() }}" name="block_btn">Block/Unlblock</button></td>
-                <td><button type="submit" value="{{ value.getName() }}" name="del_btn">Delete</button></td>
-                <td><a href="{{ asset('/dashboard/{{ value.getName() }}') }}" >DashBoard</a></td>
+    <h1 class="display-4">Mes projets</h1>
+    <hr class="my-4">
+    <form METHOD="post">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Nom du projet</th>
+                <th scope="col">Sécurité</th>
+                <th scope="col">Suppression</th>
+                <th scope="col">Dashboard</th>
             </tr>
+            </thead>
+        {% for key , value in projects %}
 
-       <br>
+                <tr class="table-light">
+                    <th>{{ value.getName() }}</th>
+                    <td><button class="btn btn-warning" type="submit" value="{{ value.getName() }}" name="block_btn">Block/Unblock</button></td>
+                    <td><button class="btn btn-primary" type="submit" value="{{ value.getName() }}" name="del_btn">Delete</button></td>
+                    <td><a href="{{ asset('/dashboard/{{ value.getName() }}') }}" >DashBoard</a></td>
+                </tr>
+
+           <br>
+        {% endfor %}
         </table>
-       </form>
-    {% endfor %}
+    </form>
 {% endblock %}
 
 {% block title %}
