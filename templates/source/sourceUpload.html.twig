@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% form_theme formP 'bootstrap_4_layout.html.twig' %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('flags/flags.min.css') }}" />
 {% endblock %}
@@ -28,8 +28,26 @@
     <h3>Translations</h3>
     {{ form(formP) }}<br>
 
-
 {% endblock %}
+
+    {% block javascripts %}
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/multiple-select.js') }}"></script>
+        <script>
+            $(function() {
+                $('#ms').change(function() {
+                    console.log($(this).val());
+                }).multipleSelect({
+                    width: '100%'
+                });
+            });
+            // Permet d'afficher le nom du fichier uploadé (bug bootstrap)
+            $(document).on('change', '.custom-file-input', function () {
+                let fileName = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+                $(this).parent('.custom-file').find('.custom-file-label').text(fileName);
+            });
+        </script>
+    {% endblock %}
 
 {% block title %}
     my project

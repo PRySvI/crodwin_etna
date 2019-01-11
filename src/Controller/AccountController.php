@@ -95,6 +95,9 @@ class AccountController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
+        if($user == null)
+            return $this->redirectToRoute('home');
+
         dump($user);
         $langsList = $request->get("choised_lang");
         if (isset($langsList)) {
@@ -144,6 +147,9 @@ class AccountController extends AbstractController
     {
         /**@var User $user**/
         $user = $this->getUser();
+        if($user == null)
+            return $this->redirectToRoute('home');
+
         $allSources=array();
         $tRSources=array();
         foreach ($user->getProjects() as $project)

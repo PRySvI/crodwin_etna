@@ -10,21 +10,22 @@
 {% block body %}
 
 
-<form method="post" >
-    <table>
-    {% for key , value  in strings %}
+    <form method="post" >
+        <table>
+            {% for key , value  in strings %}
 
-        <tr>
-            <td>{{ key }}</td>
-            <td><label for="{{ key }}">{{ value }}</label><br>
-                <input type="hidden" name="translated_keys[]" value="{{ key }}">
-                <textarea id="{{ key }}" name="translated_values[]" rows="5" cols="150"></textarea><br>
+                <tr>
+                    <td>{{ key }}</td>
+                    <td><label for="{{ key }}">{{ value | convert_encoding('UTF-8', 'ISO-8859-1') }}</label><br>
+                        <input type="hidden" name="translated_keys[]" value="{{ key }}">
+                        <textarea id="{{ key }}" name="translated_values[]" rows="5" cols="150"></textarea><br>
 
-        </tr>
-    {% endfor %}
-    </table>
-    <button type="submit" {% if project_blocked==true %} disabled {% endif %}>Save</button></td>
-</form>
+                </tr>
+            {% endfor %}
+        </table>
+        <button class="btn btn-primary" type="submit">Save</button></td>
+    </form>
+
     {% block javascript %}
         <script src="{{ asset('js/modify_source.js') }}"></script>
     {% endblock %}
